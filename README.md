@@ -912,3 +912,107 @@ Would you like to continue with **Question 7: Explain Callbacks, Promises, and A
 
 ---
 
+## **7️⃣ Explain Callbacks, Promises, and Async/Await in JavaScript**  
+
+### **🟢 Why is This Important?**  
+JavaScript is **asynchronous** and uses **non-blocking** execution to handle tasks like **fetching data from APIs, reading files, or setting timers**.  
+
+To manage async operations, JavaScript provides three main techniques:  
+1️⃣ **Callbacks** (Old way)  
+2️⃣ **Promises** (Modern way)  
+3️⃣ **Async/Await** (Best way for readability)  
+
+---
+
+## **🟢 1️⃣ Callbacks (The Old Way)**
+### **Definition:**  
+- A **callback function** is a function passed as an argument to another function, which gets executed later.  
+- It helps in **handling async operations** like API calls, but can lead to **"callback hell"** (nested callbacks).
+
+### **Example: Callback Function**
+```javascript
+function fetchData(callback) {
+    setTimeout(() => {
+        callback("Data received");
+    }, 2000);
+}
+
+fetchData((data) => {
+    console.log(data);  // Output after 2 seconds: "Data received"
+});
+```
+🔹 **Problem:** Callbacks get **deeply nested**, making code **hard to read** and **maintain**.
+
+---
+
+## **🟢 2️⃣ Promises (ES6 - Modern Approach)**
+### **Definition:**
+- A **Promise** is an object that represents a value which may be available **now, later, or never**.  
+- It has **three states:**
+  - **Pending** → Initial state, operation not completed yet  
+  - **Resolved (Fulfilled)** → Operation completed successfully  
+  - **Rejected** → Operation failed  
+
+### **Example: Using a Promise**
+```javascript
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Data received");
+        }, 2000);
+    });
+}
+
+fetchData()
+    .then((data) => console.log(data))  // Output after 2 seconds: "Data received"
+    .catch((error) => console.log(error));
+```
+✅ **Advantage:** **No deep nesting, better readability** than callbacks.  
+
+---
+
+## **🟢 3️⃣ Async/Await (ES7 - Best Approach)**
+### **Definition:**
+- **async** → Declares a function that returns a **Promise**.  
+- **await** → Pauses execution until the Promise **resolves**.  
+- **Async/Await makes code look synchronous and more readable.**  
+
+### **Example: Using Async/Await**
+```javascript
+async function fetchData() {
+    return "Data received"; // Returns a resolved Promise
+}
+
+async function getData() {
+    const data = await fetchData();
+    console.log(data);  // Output: "Data received"
+}
+
+getData();
+```
+✅ **Advantage:** **Best readability, avoids promise chaining.**
+
+---
+
+## **🟢 Comparison: Callbacks vs. Promises vs. Async/Await**
+| Feature       | Callbacks  | Promises  | Async/Await  |
+|--------------|-----------|-----------|-------------|
+| **Readability** | Hard to read | Better | Best |
+| **Error Handling** | Difficult | `.catch()` | `try/catch` |
+| **Chaining** | Callback Hell | `.then()` chaining | Easy, looks synchronous |
+| **Best Use Case** | Older codebases | API calls, async tasks | Modern applications |
+
+---
+
+## **🟢 Interview Tip**
+- First, explain **why async handling is needed** in JavaScript.  
+- Use **a simple real-world analogy** (e.g., ordering food in a restaurant while waiting for a table).  
+- Show **how each method improves upon the previous one**.  
+- **Use an example** with API fetching (`fetch` or `setTimeout`).  
+
+---
+
+Would you like to continue with **Question 8: Explain JavaScript DOM and BOM?** 🚀
+
+---
+
