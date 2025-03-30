@@ -830,3 +830,85 @@ Would you like to continue with **Question 6: What is the difference between syn
 
 ---
 
+## **6️⃣ What is the Difference Between Synchronous and Asynchronous JavaScript?**  
+
+### **🟢 Why is This Important?**  
+JavaScript is **single-threaded**, meaning it executes one operation at a time. However, modern applications require handling multiple tasks, like API requests and timers, without blocking execution. This is where **synchronous** and **asynchronous** execution comes into play.  
+
+---
+
+## **🟢 Synchronous JavaScript**
+### **Definition:**
+- Synchronous code executes **line by line, in order**.
+- Each operation **blocks the execution** of the next operation until it completes.
+
+### **Example:**
+```javascript
+console.log("Task 1");
+console.log("Task 2");
+console.log("Task 3");
+```
+
+### **🟢 Output:**
+```
+Task 1
+Task 2
+Task 3
+```
+- Each statement executes sequentially.
+- If one task takes time (e.g., a heavy calculation), the entire execution **pauses** until it's done.
+
+### **🚨 Problem with Synchronous Execution:**
+- If one task takes too long, **the UI freezes** in web applications.
+- The user experience becomes poor.
+
+---
+
+## **🟢 Asynchronous JavaScript**
+### **Definition:**
+- Asynchronous code allows execution **to continue without waiting** for a task to complete.
+- JavaScript uses the **Event Loop**, **Callbacks**, **Promises**, and **Async/Await** to handle async operations.
+
+### **Example: setTimeout (Asynchronous)**
+```javascript
+console.log("Task 1");
+
+setTimeout(() => {
+    console.log("Task 2");
+}, 2000);
+
+console.log("Task 3");
+```
+
+### **🟢 Output:**
+```
+Task 1
+Task 3
+Task 2 (after 2 seconds)
+```
+- `setTimeout` is non-blocking, so JavaScript **does not wait** for it to finish before moving to the next task.
+- This keeps the program **responsive**.
+
+---
+
+## **🟢 Key Differences Between Synchronous and Asynchronous JavaScript**
+| Feature | Synchronous | Asynchronous |
+|---------|------------|-------------|
+| **Execution Order** | One operation at a time, sequential | Can execute multiple tasks simultaneously |
+| **Blocking Behavior** | Blocks execution until the current task is finished | Non-blocking, allows other tasks to run |
+| **Performance** | Can slow down the program if a task takes too long | Efficient and responsive |
+| **Examples** | Normal function calls, loops, DOM updates | API calls, Timers, Promises, Fetch, Async/Await |
+
+---
+
+## **🟢 Interview Tip**
+- **Explain the problem with synchronous execution (blocking UI).**
+- **Mention how async code helps with real-world tasks like fetching data from an API.**
+- **Use `setTimeout` or a simple `fetch` example to demonstrate async execution.**
+
+---
+
+Would you like to continue with **Question 7: Explain Callbacks, Promises, and Async/Await in JavaScript?** 🚀
+
+---
+
