@@ -413,3 +413,72 @@ heading.addEventListener('click', function() {
 Would you like to proceed with **Question 2: Difference between `innerHTML`, `textContent`, and `innerText`?** 🚀
 
 ---
+
+### **2️⃣ Difference between `innerHTML`, `textContent`, and `innerText`**  
+
+#### **1. `innerHTML`**  
+- Retrieves or sets **HTML content** inside an element.  
+- Parses and renders HTML tags inside the element.  
+- **Vulnerable to XSS (Cross-Site Scripting) attacks** if handling user input.  
+
+✅ **Example:**  
+```html
+<div id="demo">Hello <b>World</b></div>
+<script>
+    let element = document.getElementById('demo');
+    console.log(element.innerHTML); // Output: Hello <b>World</b>
+    element.innerHTML = "<h2>New Heading</h2>"; // Changes content
+</script>
+```
+---
+
+#### **2. `textContent`**  
+- Retrieves or sets **only text content** of an element.  
+- Ignores HTML tags and returns only raw text.  
+- **Safer** than `innerHTML` as it prevents script injection.  
+
+✅ **Example:**  
+```html
+<div id="demo">Hello <b>World</b></div>
+<script>
+    let element = document.getElementById('demo');
+    console.log(element.textContent); // Output: Hello World
+    element.textContent = "<h2>New Heading</h2>"; // Displays as plain text
+</script>
+```
+---
+
+#### **3. `innerText` (Similar to `textContent` with a key difference)**  
+- Retrieves **only visible text**, ignoring hidden elements (e.g., `display: none`).  
+- Ignores HTML but respects CSS styling.  
+
+✅ **Example:**  
+```html
+<div id="demo" style="display:none">Hello <b>World</b></div>
+<script>
+    let element = document.getElementById('demo');
+    console.log(element.textContent); // Output: Hello World (even if hidden)
+    console.log(element.innerText);   // Output: (empty because it's hidden)
+</script>
+```
+---
+
+### **🚀 Key Differences Summary:**  
+
+| Property     | Reads HTML? | Reads Hidden Text? | Safer from XSS? |
+|-------------|------------|-------------------|-----------------|
+| `innerHTML` | ✅ Yes      | ✅ Yes            | ❌ No (Unsafe)  |
+| `textContent` | ❌ No   | ✅ Yes            | ✅ Yes (Safe)   |
+| `innerText`  | ❌ No      | ❌ No             | ✅ Yes (Safe)   |
+
+---
+
+### **✅ Interview Tip:**  
+- Mention that `innerHTML` is **powerful but risky** (XSS attacks).  
+- Use `textContent` when you need **safe plain text manipulation**.  
+- Use `innerText` when you need **only visible text**.  
+
+---
+
+Would you like to continue with **Question 3: What is the BOM (Browser Object Model)?** 🚀
+
