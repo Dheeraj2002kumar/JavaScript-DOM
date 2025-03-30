@@ -756,3 +756,77 @@ Would you like to continue with **Question 5: How does the Event Loop work in Ja
 
 ---
 
+## **5️⃣ How Does the Event Loop Work in JavaScript?**  
+
+### **🟢 Why Do We Need the Event Loop?**  
+JavaScript is **single-threaded**, meaning it can execute only one task at a time. However, modern web applications require **asynchronous operations** like API calls, timers, and user interactions without blocking the main thread.  
+
+The **event loop** ensures that JavaScript can handle asynchronous operations efficiently without freezing the UI.  
+
+---
+
+## **🟢 Event Loop Explained with Call Stack & Task Queues**
+JavaScript’s event loop manages execution using three main components:
+
+1️⃣ **Call Stack**: Keeps track of function execution in LIFO (Last In, First Out) order.  
+2️⃣ **Web APIs**: Handles async tasks (e.g., setTimeout, fetch, event listeners).  
+3️⃣ **Task Queues**:
+   - **Callback Queue (Macrotask Queue)**: Stores setTimeout, setInterval, event handlers, etc.  
+   - **Microtask Queue**: Stores Promises, `process.nextTick` (executed before macrotasks).  
+
+The **event loop** continuously checks whether the call stack is empty. If it is, it pushes tasks from the queue into the call stack.
+
+---
+
+## **🟢 How JavaScript Handles Asynchronous Code**
+### **Example: setTimeout & Promise Execution Order**
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+    console.log("setTimeout Callback");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("Promise Callback");
+});
+
+console.log("End");
+```
+
+### **🟢 Execution Order:**
+1️⃣ `"Start"` → Logged immediately (synchronous).  
+2️⃣ `"End"` → Logged immediately (synchronous).  
+3️⃣ `"Promise Callback"` → Logged next (microtask executes before macrotask).  
+4️⃣ `"setTimeout Callback"` → Logged last (macrotask executes after microtasks).  
+
+### **🟢 Output:**
+```
+Start
+End
+Promise Callback
+setTimeout Callback
+```
+
+---
+
+## **🟢 Priority of Tasks in the Event Loop**
+| Priority | Task Type | Examples |
+|----------|----------|----------|
+| **1️⃣ First** | **Synchronous Code** | Regular function calls, loops, variable assignments |
+| **2️⃣ Second** | **Microtasks (Higher Priority)** | Promises (`.then()`), `process.nextTick()` (Node.js) |
+| **3️⃣ Third** | **Macrotasks (Lower Priority)** | setTimeout, setInterval, setImmediate, I/O operations |
+
+---
+
+## **🟢 Interview Tip**
+- **Explain that the event loop enables non-blocking, asynchronous execution.**
+- **Mention that microtasks (Promises) run before macrotasks (setTimeout).**
+- **Use a real-world example like handling API responses in a web app.**
+
+---
+
+Would you like to continue with **Question 6: What is the difference between synchronous and asynchronous JavaScript?** 🚀
+
+---
+
