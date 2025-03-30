@@ -1803,3 +1803,147 @@ Would you like to continue with **Question 14: Explain JavaScript Promises and A
 
 ---
 
+## **🟢 1️⃣ JavaScript Promises and Async/Await**  
+
+### **🔹 Why is This Important?**  
+In JavaScript, handling **asynchronous operations** efficiently is **crucial** for:  
+✅ Fetching data from APIs (AJAX calls).  
+✅ Performing database queries.  
+✅ Handling time-based operations (setTimeout, setInterval).  
+✅ Ensuring non-blocking execution of code.  
+
+---
+
+## **🟢 2️⃣ What is a Promise?**  
+📌 **Definition:**  
+A **Promise** is an **object** that represents the **eventual completion (or failure)** of an asynchronous operation. It helps **avoid callback hell** and provides a cleaner way to handle async operations.  
+
+📌 **States of a Promise:**  
+A Promise can be in one of three states:  
+1️⃣ **Pending** → Initial state (async operation is still in progress).  
+2️⃣ **Fulfilled** → Operation was successful.  
+3️⃣ **Rejected** → Operation failed.  
+
+📌 **Basic Syntax:**  
+```js
+const myPromise = new Promise((resolve, reject) => {
+    let success = true; // Simulating success or failure
+    setTimeout(() => {
+        if (success) {
+            resolve("Promise Resolved! ✅");
+        } else {
+            reject("Promise Rejected ❌");
+        }
+    }, 2000);
+});
+
+// Handling the Promise
+myPromise
+    .then(response => console.log(response)) // Runs if resolved
+    .catch(error => console.log(error))     // Runs if rejected
+    .finally(() => console.log("Operation Complete")); // Always runs
+```
+✅ **Output (After 2 Seconds)**  
+```js
+Promise Resolved! ✅
+Operation Complete
+```
+
+---
+
+## **🟢 3️⃣ What is Async/Await?**  
+📌 **Definition:**  
+**Async/Await** is a cleaner and more readable way to work with Promises in JavaScript.  
+✅ **Async functions always return a Promise.**  
+✅ **Await pauses execution until the Promise is resolved or rejected.**  
+✅ **It makes asynchronous code look synchronous.**  
+
+📌 **Example (Fetching API Data with Async/Await)**  
+```js
+async function fetchData() {
+    try {
+        let response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+        let data = await response.json(); // Parsing JSON response
+        console.log(data); // Output: API Data
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+fetchData();
+```
+✅ **Advantages of Async/Await over Promises:**  
+- **Code Readability:** Looks like synchronous code.  
+- **Error Handling:** Uses try/catch instead of `.catch()`.  
+- **Less Nesting:** No need for multiple `.then()` chaining.  
+
+---
+
+## **🟢 4️⃣ Differences Between Promises and Async/Await**  
+
+| Feature | Promises (`.then() & .catch()`) | Async/Await |
+|---------|----------------------|------------|
+| **Code Style** | Uses `.then()` and `.catch()` | Uses `await` inside `async` functions |
+| **Readability** | More nested, harder to read | Cleaner, looks synchronous |
+| **Error Handling** | Uses `.catch()` | Uses `try/catch` |
+| **Execution Control** | Executes `.then()` on fulfillment | `await` pauses execution until resolved |
+| **Use Case** | Good for simple async chains | Better for complex async logic |
+
+---
+
+## **🟢 5️⃣ Real-World Use Cases of Promises & Async/Await**  
+
+| **Scenario** | **Use** |
+|-------------|--------|
+| Fetching data from an API | ✅ **Async/Await** |
+| Reading a file in Node.js | ✅ **Promise-based FS module** |
+| Processing multiple API requests in parallel | ✅ **Promise.all()** |
+| Handling dependent async operations | ✅ **Async/Await** |
+| Handling time-based operations | ✅ **setTimeout() inside a Promise** |
+
+---
+
+## **🟢 6️⃣ Handling Multiple Promises with `Promise.all()`**  
+📌 **Use Case:** Fetch multiple APIs in parallel to improve performance.  
+```js
+async function fetchMultipleData() {
+    try {
+        let [user, posts] = await Promise.all([
+            fetch("https://jsonplaceholder.typicode.com/users/1").then(res => res.json()),
+            fetch("https://jsonplaceholder.typicode.com/posts?userId=1").then(res => res.json())
+        ]);
+
+        console.log("User:", user);
+        console.log("Posts:", posts);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+fetchMultipleData();
+```
+✅ **Benefit:** Fetches both APIs **simultaneously** instead of waiting for one to complete before starting the next.  
+
+---
+
+## **🟢 7️⃣ Common Interview Questions on Promises & Async/Await**  
+**1️⃣ What is the difference between a Callback, a Promise, and Async/Await?**  
+**2️⃣ How does error handling work in Promises vs. Async/Await?**  
+**3️⃣ What happens if an API call inside `async` function fails?**  
+**4️⃣ What is `Promise.all()`, `Promise.race()`, and `Promise.allSettled()`?**  
+**5️⃣ How does the Event Loop handle Promises in JavaScript?**  
+
+---
+
+## **🟢 8️⃣ Interview Tips**  
+✅ Explain **how Promises help avoid callback hell** and why they are better than traditional callbacks.  
+✅ Discuss **how the event loop prioritizes microtasks** (Promises) over regular tasks.  
+✅ Demonstrate **code examples** using both `.then()` and `async/await`.  
+✅ **Use real-world scenarios** like fetching API data, file reading, or handling multiple requests.  
+
+---
+
+Would you like to continue with **Question 15: Explain JavaScript Closures with Examples?** 🚀
+
+---
+
