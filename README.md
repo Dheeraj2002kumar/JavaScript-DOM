@@ -2815,3 +2815,147 @@ Would you like to continue with **Question 19: Explain JavaScript Hoisting with 
 
 ---
 
+## **🟢 1️⃣ JavaScript Hoisting: Deep Explanation with Examples**  
+
+### **🔹 Why is This Important?**  
+JavaScript **hoisting** is a frequently asked **interview question** because:  
+✅ Many developers misunderstand how variables and functions behave before execution.  
+✅ Hoisting helps explain why **some variables and functions work before they are declared**.  
+✅ Understanding hoisting **avoids common bugs** and improves debugging skills.  
+
+---
+
+## **🟢 2️⃣ What is Hoisting in JavaScript?**  
+📌 **Definition:**  
+**Hoisting** is JavaScript’s behavior of **moving declarations** to the top of their scope **before execution**.  
+
+✅ **Only the declaration is hoisted, not the initialization.**  
+
+📌 **Example of Hoisting with `var`**
+```js
+console.log(x); // Output: undefined
+var x = 5;
+console.log(x); // Output: 5
+```
+✅ **Why?**  
+- JavaScript **moves** `var x;` **to the top** (before execution), but **does not initialize** `x` until the assignment.  
+- This is why `console.log(x);` prints `undefined`, **not an error**.  
+
+---
+
+## **🟢 3️⃣ Hoisting with `var`, `let`, and `const`**  
+✅ **Understanding how different variable declarations behave with hoisting.**  
+
+| Variable Type | Hoisted? | Default Value Before Initialization | Scope |
+|--------------|---------|--------------------------------|--------|
+| `var`       | ✅ Yes | `undefined` | Function Scope |
+| `let`       | ✅ Yes (but in **TDZ**) | ❌ ReferenceError | Block Scope |
+| `const`     | ✅ Yes (but in **TDZ**) | ❌ ReferenceError | Block Scope |
+
+📌 **Example: Hoisting with `var` vs `let` vs `const`**  
+```js
+console.log(a); // Output: undefined
+var a = 10;
+
+console.log(b); // ❌ ReferenceError: Cannot access 'b' before initialization
+let b = 20;
+
+console.log(c); // ❌ ReferenceError: Cannot access 'c' before initialization
+const c = 30;
+```
+✅ **Key Takeaways:**  
+- `var` is **hoisted** with `undefined`.  
+- `let` and `const` are hoisted but exist in the **Temporal Dead Zone (TDZ)**, leading to **ReferenceError**.  
+
+---
+
+## **🟢 4️⃣ Hoisting with Functions**  
+📌 **Function Declarations are Hoisted**  
+✅ You can call a function **before defining it**.  
+```js
+sayHello();
+
+function sayHello() {
+    console.log("Hello, world!");
+}
+
+// Output: "Hello, world!"
+```
+✅ **Why?**  
+- The entire function **is hoisted**, so it **can be called before its declaration**.  
+
+📌 **Function Expressions are NOT Hoisted**  
+❌ If a function is assigned to a variable (`var`, `let`, `const`), it **is NOT hoisted** the same way.  
+```js
+sayHi(); // ❌ TypeError: sayHi is not a function
+
+var sayHi = function() {
+    console.log("Hi!");
+};
+```
+✅ **Why?**  
+- `var sayHi;` is hoisted, but **not its assignment**.  
+- So at `sayHi();`, `sayHi` is `undefined`, and calling `undefined()` causes an error.  
+
+📌 **Arrow Functions are NOT Hoisted**  
+```js
+greet(); // ❌ TypeError: greet is not a function
+
+const greet = () => console.log("Hello!");
+```
+✅ **Why?**  
+- `greet` is **declared using `const`**, and `const` is **not initialized before execution**.  
+
+---
+
+## **🟢 5️⃣ What is the Temporal Dead Zone (TDZ)?**  
+📌 **Definition:**  
+The **Temporal Dead Zone (TDZ)** is the time **between hoisting and initialization** when accessing a variable results in an **error**.  
+
+📌 **Example:**
+```js
+console.log(x); // ❌ ReferenceError: Cannot access 'x' before initialization
+let x = 10;
+```
+✅ **Why?**  
+- `x` is hoisted but **not initialized**, so it’s in the **TDZ** before its declaration.  
+
+---
+
+## **🟢 6️⃣ Interview Questions on Hoisting**  
+
+🔹 **Basic Questions:**  
+1️⃣ What is hoisting in JavaScript?  
+2️⃣ What gets hoisted: variables, functions, or both?  
+3️⃣ What is the difference between `var`, `let`, and `const` in terms of hoisting?  
+
+🔹 **Advanced Questions:**  
+4️⃣ What is the **Temporal Dead Zone (TDZ)**?  
+5️⃣ Why do function expressions and arrow functions behave differently in hoisting?  
+6️⃣ Explain a real-world scenario where hoisting could cause a bug.  
+
+🔹 **Code-Based Questions:**  
+7️⃣ What will be the output of the following code?  
+```js
+console.log(myVar);
+var myVar = 5;
+console.log(myVar);
+```
+8️⃣ What happens when using `let` inside a loop with `setTimeout()`?  
+9️⃣ Write a function that demonstrates hoisting issues and fixes them.  
+
+---
+
+## **🟢 7️⃣ Interview Tips for Hoisting**  
+✅ **Explain the Execution Context**: Show how JavaScript first **scans the code**, hoists declarations, and then executes it.  
+✅ **Write Code on Whiteboard**: Be ready to demonstrate hoisting behavior.  
+✅ **Use Real-World Examples**: Debugging `undefined` variables in functions.  
+✅ **Highlight TDZ and Let/Const Differences**: Show that `var` works differently from `let`/`const`.  
+
+---
+
+Would you like to continue with **Question 20: Explain JavaScript Prototype and Prototype Chain with Examples?** 🚀
+
+---
+
+
