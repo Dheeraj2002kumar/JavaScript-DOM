@@ -482,3 +482,113 @@ Would you like to proceed with **Question 2: Difference between `innerHTML`, `te
 
 Would you like to continue with **Question 3: What is the BOM (Browser Object Model)?** 🚀
 
+---
+
+## **3️⃣ What is the BOM (Browser Object Model)?**  
+
+### **🟢 Definition:**  
+The **Browser Object Model (BOM)** is a set of JavaScript objects that interact with the browser (outside the webpage content). It allows developers to control browser behavior like opening new tabs, navigating pages, and managing browser properties.  
+
+Unlike the **DOM (Document Object Model),** which deals with **HTML elements**, the BOM interacts with the **browser itself**.
+
+---
+
+### **🟢 Key Components of BOM:**
+#### 1️⃣ **`window` Object (Global Object)**  
+- The `window` object is the top-level object in JavaScript, representing the browser window.  
+- All global JavaScript functions and variables belong to `window`.  
+
+✅ **Example:**  
+```javascript
+console.log(window.innerWidth); // Get the viewport width
+console.log(window.innerHeight); // Get the viewport height
+```
+
+---
+
+#### 2️⃣ **`navigator` Object (Browser Info)**  
+- Provides details about the browser, OS, and user agent.  
+
+✅ **Example:**  
+```javascript
+console.log(navigator.userAgent); // Get browser details
+console.log(navigator.language); // Get browser language
+console.log(navigator.platform); // Get OS platform
+```
+
+---
+
+#### 3️⃣ **`location` Object (URL & Navigation Control)**  
+- Provides details about the current URL and allows redirection.  
+
+✅ **Example:**  
+```javascript
+console.log(location.href); // Get the full URL
+console.log(location.hostname); // Get the domain name
+console.log(location.pathname); // Get the current page path
+location.reload(); // Reload the page
+// location.href = "https://www.google.com"; // Redirect to another site
+```
+
+---
+
+#### 4️⃣ **`history` Object (Back & Forward Navigation)**  
+- Controls the browser’s history.  
+
+✅ **Example:**  
+```javascript
+history.back(); // Go back one page
+history.forward(); // Go forward one page
+console.log(history.length); // Get the number of pages in history
+```
+
+---
+
+#### 5️⃣ **`screen` Object (Screen Resolution Info)**  
+- Provides screen size and resolution details.  
+
+✅ **Example:**  
+```javascript
+console.log(screen.width); // Get screen width
+console.log(screen.height); // Get screen height
+console.log(screen.availWidth); // Get available width (excluding UI elements)
+console.log(screen.availHeight); // Get available height
+```
+
+---
+
+#### 6️⃣ **`alert()`, `confirm()`, and `prompt()` (User Interaction)**  
+- `alert()`: Displays a message box.  
+- `confirm()`: Asks the user for confirmation (OK/Cancel).  
+- `prompt()`: Gets user input.  
+
+✅ **Example:**  
+```javascript
+alert("Hello! Welcome to the website.");
+let userResponse = confirm("Do you want to continue?");
+let userName = prompt("Enter your name:", "Guest");
+console.log(userResponse, userName);
+```
+
+---
+
+### **🟢 BOM vs DOM**
+| Feature | BOM | DOM |
+|---------|----|----|
+| Purpose | Interacts with the **browser** (e.g., URL, history, screen) | Interacts with **HTML elements** |
+| Object | `window`, `navigator`, `location`, `history`, `screen` | `document` |
+| Control | Controls **browser behavior** | Controls **webpage content** |
+
+---
+
+### **✅ Interview Tip:**  
+- Clearly differentiate **BOM (browser operations)** from **DOM (HTML manipulation)**.  
+- Mention that **BOM has no official standard**, but most browsers implement similar features.  
+- Use real-world examples like redirecting users (`location.href`) or getting browser details (`navigator.userAgent`).  
+
+---
+
+Would you like to continue with **Question 4: What is the `document` object in JavaScript (DOM)?** 🚀
+
+---
+
