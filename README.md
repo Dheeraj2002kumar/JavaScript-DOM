@@ -1324,3 +1324,113 @@ Would you like to continue with **Question 10: Explain Event Delegation in JavaS
 
 ---
 
+## **🔟 Event Delegation in JavaScript**  
+
+### **🔹 Why is This Important?**  
+Event delegation is a powerful JavaScript technique used to **efficiently handle events on multiple elements**, especially when elements are dynamically added to the DOM. It improves performance and reduces memory usage.  
+
+---
+
+## **🟢 1️⃣ What is Event Delegation?**  
+Instead of adding event listeners to individual child elements, **we attach a single event listener to a parent element**. This works because of **event bubbling** (where events propagate from the target element up to the parent elements).  
+
+---
+
+## **🟢 2️⃣ Why Use Event Delegation?**
+✅ **Improves Performance** → Reduces the number of event listeners.  
+✅ **Handles Dynamic Elements** → Works even if new elements are added later.  
+✅ **Simplifies Code** → Avoids multiple event bindings.  
+
+---
+
+## **🟢 3️⃣ Example Without Event Delegation (Bad Approach)**
+```html
+<button class="item">Item 1</button>
+<button class="item">Item 2</button>
+<button class="item">Item 3</button>
+
+<script>
+    document.querySelectorAll(".item").forEach(button => {
+        button.addEventListener("click", function() {
+            alert("Button clicked: " + this.innerText);
+        });
+    });
+</script>
+```
+🚨 **Problems:**
+- Adds multiple event listeners (**one per button**), increasing memory usage.
+- If new buttons are added dynamically, they **won’t have event listeners**.
+
+---
+
+## **🟢 4️⃣ Example With Event Delegation (Better Approach)**
+```html
+<div id="parent">
+    <button class="item">Item 1</button>
+    <button class="item">Item 2</button>
+    <button class="item">Item 3</button>
+</div>
+
+<script>
+    document.getElementById("parent").addEventListener("click", function(event) {
+        if (event.target.classList.contains("item")) {
+            alert("Button clicked: " + event.target.innerText);
+        }
+    });
+</script>
+```
+✅ **Advantages:**
+- Uses **only one event listener** (on the parent).  
+- Works even if new buttons are added dynamically.  
+
+---
+
+## **🟢 5️⃣ Handling Dynamically Added Elements**
+```html
+<div id="parent">
+    <button class="item">Item 1</button>
+    <button class="item">Item 2</button>
+</div>
+<button id="addBtn">Add New Button</button>
+
+<script>
+    document.getElementById("parent").addEventListener("click", function(event) {
+        if (event.target.classList.contains("item")) {
+            alert("Clicked: " + event.target.innerText);
+        }
+    });
+
+    document.getElementById("addBtn").addEventListener("click", function() {
+        let newButton = document.createElement("button");
+        newButton.className = "item";
+        newButton.innerText = "New Item";
+        document.getElementById("parent").appendChild(newButton);
+    });
+</script>
+```
+✅ **Newly added buttons will still trigger the event listener!**  
+
+---
+
+## **🟢 6️⃣ When to Use Event Delegation?**
+✅ When handling events on **multiple similar elements** (e.g., list items, buttons).  
+✅ When elements **are added dynamically**.  
+✅ When optimizing performance by **reducing event listeners**.  
+
+🚨 **Avoid Event Delegation if:**  
+- The event **does not bubble** (e.g., `blur`, `focus`).  
+- Performance is **not an issue** (e.g., handling only 2-3 elements).  
+
+---
+
+## **🟢 7️⃣ Interview Tip**
+- **Explain bubbling**: Events move **from child to parent**, allowing delegation.  
+- **Give real-world examples**: E.g., click events on dynamically generated menu items.  
+- **Demonstrate efficiency**: One event listener instead of many saves memory.  
+
+---
+
+Would you like to continue with **Question 11: What is the difference between Synchronous and Asynchronous JavaScript?** 🚀
+
+---
+
