@@ -187,3 +187,170 @@ document.body.appendChild(newElement);
 ### **BOM** → Controls the browser behavior (window, location, history).  
 
 Mastering **DOM & BOM** will help you build interactive websites and **ace JavaScript interviews**! 🚀 
+
+---
+
+Awesome! Here are some **hands-on coding challenges** related to **DOM (Document Object Model) and BOM (Browser Object Model)** that will help you master these concepts for interviews and real-world projects.  
+
+---
+
+## 🔥 **DOM Coding Challenges**  
+
+### **1️⃣ Create and Append Elements Dynamically**  
+**Task:** Write a JavaScript function that creates a `<div>` element with some text and appends it to the `<body>` when a button is clicked.  
+
+```html
+<button id="addDivBtn">Add Div</button>
+<script>
+  document.getElementById("addDivBtn").addEventListener("click", function () {
+    let newDiv = document.createElement("div");
+    newDiv.textContent = "Hello, I was added dynamically!";
+    newDiv.style.backgroundColor = "lightblue";
+    document.body.appendChild(newDiv);
+  });
+</script>
+```
+✅ **Interview Tip:** This demonstrates how to manipulate the DOM dynamically.  
+
+---
+
+### **2️⃣ Toggle Visibility of an Element**  
+**Task:** Create a button that hides and shows a paragraph when clicked.  
+
+```html
+<button id="toggleBtn">Show/Hide</button>
+<p id="toggleText">This is a toggle paragraph.</p>
+
+<script>
+  document.getElementById("toggleBtn").addEventListener("click", function () {
+    let para = document.getElementById("toggleText");
+    para.style.display = para.style.display === "none" ? "block" : "none";
+  });
+</script>
+```
+✅ **Interview Tip:** Understanding `style.display` is key for DOM manipulation.  
+
+---
+
+### **3️⃣ Update Text Content in Real-Time**  
+**Task:** Create an input field where users type, and the text updates live below it.  
+
+```html
+<input type="text" id="userInput" placeholder="Type something..." />
+<p id="outputText">You typed: </p>
+
+<script>
+  document.getElementById("userInput").addEventListener("input", function () {
+    document.getElementById("outputText").textContent = "You typed: " + this.value;
+  });
+</script>
+```
+✅ **Interview Tip:** This demonstrates event listeners and dynamic text updating.  
+
+---
+
+### **4️⃣ Change Background Color on Button Click**  
+**Task:** Create buttons that change the page’s background color when clicked.  
+
+```html
+<button onclick="changeColor('red')">Red</button>
+<button onclick="changeColor('blue')">Blue</button>
+
+<script>
+  function changeColor(color) {
+    document.body.style.backgroundColor = color;
+  }
+</script>
+```
+✅ **Interview Tip:** Shows how to modify CSS properties dynamically.  
+
+---
+
+## 🌍 **BOM (Browser Object Model) Coding Challenges**  
+
+### **5️⃣ Get Window Dimensions**  
+**Task:** Display the width and height of the browser window dynamically.  
+
+```html
+<p id="sizeDisplay"></p>
+
+<script>
+  function updateSize() {
+    document.getElementById("sizeDisplay").textContent =
+      `Width: ${window.innerWidth}, Height: ${window.innerHeight}`;
+  }
+
+  window.addEventListener("resize", updateSize);
+  updateSize();
+</script>
+```
+✅ **Interview Tip:** Shows how to handle `window` object properties and events.  
+
+---
+
+### **6️⃣ Redirect to Another Page After a Countdown**  
+**Task:** Display a countdown timer, then redirect to another page after 5 seconds.  
+
+```html
+<p id="countdown">Redirecting in 5 seconds...</p>
+
+<script>
+  let count = 5;
+  let interval = setInterval(() => {
+    document.getElementById("countdown").textContent = `Redirecting in ${count} seconds...`;
+    count--;
+    if (count < 0) {
+      clearInterval(interval);
+      window.location.href = "https://www.google.com";
+    }
+  }, 1000);
+</script>
+```
+✅ **Interview Tip:** Demonstrates `setInterval` and `window.location`.  
+
+---
+
+### **7️⃣ Open and Close a New Window**  
+**Task:** Create buttons to open and close a new window.  
+
+```html
+<button onclick="openNewWindow()">Open Window</button>
+<button onclick="closeNewWindow()">Close Window</button>
+
+<script>
+  let myWindow;
+
+  function openNewWindow() {
+    myWindow = window.open("https://www.google.com", "_blank", "width=400,height=300");
+  }
+
+  function closeNewWindow() {
+    if (myWindow) myWindow.close();
+  }
+</script>
+```
+✅ **Interview Tip:** Tests `window.open()` and `window.close()`.  
+
+---
+
+### **8️⃣ Detect User’s Browser and OS**  
+**Task:** Display the user’s browser name and OS.  
+
+```html
+<p id="browserInfo"></p>
+
+<script>
+  let browser = navigator.userAgent;
+  document.getElementById("browserInfo").textContent = `Your browser info: ${browser}`;
+</script>
+```
+✅ **Interview Tip:** Demonstrates the `navigator` object in BOM.  
+
+---
+
+## 🎯 **Next Steps**  
+- **Try modifying these challenges** (e.g., add animations or more features).  
+- **Practice explaining the code aloud**, just like in an interview.  
+- **Ask me for mock interview questions** if you want a challenge!  
+
+Would you like **more advanced DOM/BOM tasks**, or should we go for **mock interview Q&A** next? 🚀
