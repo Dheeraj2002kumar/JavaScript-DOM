@@ -1689,3 +1689,117 @@ Would you like to continue with **Question 13: What is Debouncing and Throttling
 
 ---
 
+## **🟢 1️⃣ Debouncing and Throttling in JavaScript**  
+
+### **🔹 Why is This Important?**  
+Debouncing and throttling are **performance optimization techniques** used in JavaScript to control **frequent function calls** in scenarios like:  
+- **Typing in a search bar (API calls should not be made on every keystroke).**  
+- **Resizing the browser window (expensive computations should be controlled).**  
+- **Scrolling events (prevent excessive execution of event listeners).**  
+
+---
+
+## **🟢 2️⃣ What is Debouncing?**  
+📌 **Definition:**  
+- **Delays function execution until after a specified time has passed since the last event trigger.**  
+- **If the event keeps firing, the timer resets.**  
+- Used to **prevent multiple rapid executions** of an expensive function (e.g., making API calls).  
+
+📌 **Example (Debouncing Search Input - API Call Optimization)**  
+```js
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Function to simulate API call
+function searchAPI(query) {
+    console.log(`Searching for: ${query}`);
+}
+
+// Debounced function
+const optimizedSearch = debounce(searchAPI, 500);
+
+// Simulating fast user typing
+optimizedSearch("H");
+optimizedSearch("He");
+optimizedSearch("Hel");
+optimizedSearch("Hell");
+optimizedSearch("Hello");  // Only this API call will execute after 500ms
+```
+✅ **Use Case:**  
+- Reducing unnecessary API requests when typing in a search bar.  
+
+---
+
+## **🟢 3️⃣ What is Throttling?**  
+📌 **Definition:**  
+- **Limits function execution to at most once in a given time interval, even if the event occurs multiple times.**  
+- **Ensures a function runs at a consistent rate.**  
+- Useful for scenarios like **scrolling, resizing, and button click events**.  
+
+📌 **Example (Throttling Scroll Event - Performance Optimization)**  
+```js
+function throttle(func, limit) {
+    let inThrottle;
+    return function (...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Function to handle scrolling
+function handleScroll() {
+    console.log("Scroll event triggered!");
+}
+
+// Throttled function
+const optimizedScroll = throttle(handleScroll, 1000);
+
+// Attaching throttled function to scroll event
+window.addEventListener("scroll", optimizedScroll);
+```
+✅ **Use Case:**  
+- Preventing excessive execution of a function during high-frequency events (e.g., window resizing, infinite scrolling).  
+
+---
+
+## **🟢 4️⃣ Key Differences Between Debouncing and Throttling**  
+
+| Feature | Debouncing | Throttling |  
+|---------|-----------|-----------|  
+| **Execution** | Runs **only after a delay** once the event stops | Runs at **regular intervals**, even if the event keeps firing |  
+| **Prevention Mechanism** | **Delays execution** and resets timer if the event fires again | **Limits execution** to one call per interval |  
+| **Use Case** | API calls while typing, button click events | Scroll event handling, window resizing |  
+
+---
+
+## **🟢 5️⃣ When to Use Debouncing vs. Throttling?**  
+
+| **Scenario** | **Use** |  
+|-------------|--------|  
+| **Typing in a search bar** (avoid making multiple API calls on each keystroke) | ✅ **Debouncing** |  
+| **Button click event** (prevent multiple form submissions) | ✅ **Debouncing** |  
+| **Window resize event** (adjust UI layout only once in a while) | ✅ **Throttling** |  
+| **Scroll event for infinite scrolling** (fetch new data at regular intervals) | ✅ **Throttling** |  
+
+---
+
+## **🟢 6️⃣ Interview Tips**  
+✅ **Explain when to use debouncing vs. throttling** using real-world examples.  
+✅ **Mention performance improvements**—helps reduce unnecessary computations and API calls.  
+✅ **Show code examples**—implementing custom debounce/throttle functions demonstrates a deep understanding.  
+✅ **Discuss event listeners**—commonly used in `scroll`, `resize`, and `input` events.  
+
+---
+
+Would you like to continue with **Question 14: Explain JavaScript Promises and Async/Await?** 🚀
+
+---
+
