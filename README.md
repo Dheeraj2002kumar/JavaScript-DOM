@@ -1434,3 +1434,137 @@ Would you like to continue with **Question 11: What is the difference between Sy
 
 ---
 
+## **1️⃣ Synchronous vs. Asynchronous JavaScript**  
+
+### **🔹 Why is This Important?**  
+Understanding **synchronous vs. asynchronous behavior** is crucial for handling operations like **API calls, file reading, or timers** efficiently in JavaScript.  
+
+---
+
+## **🟢 2️⃣ What is Synchronous JavaScript?**  
+📌 **Definition:**  
+- Synchronous JavaScript **executes code line by line** in a **blocking manner**.  
+- If a task takes time (e.g., a network request), it **halts execution** until the task completes.  
+
+📌 **Example:**  
+```js
+console.log("Start");
+for (let i = 0; i < 1e9; i++) {}  // A long-running task (blocking the code)
+console.log("End");
+```
+**Output:**  
+```
+Start
+(Delay occurs)
+End
+```
+🚨 **Problem:** The entire script is **blocked** until the loop finishes.  
+
+---
+
+## **🟢 3️⃣ What is Asynchronous JavaScript?**  
+📌 **Definition:**  
+- Asynchronous JavaScript allows the program to continue executing **without waiting** for a task to finish.  
+- Uses techniques like **callbacks, promises, and async/await**.  
+
+📌 **Example (Using setTimeout):**  
+```js
+console.log("Start");
+setTimeout(() => console.log("Inside Timeout"), 2000);
+console.log("End");
+```
+**Output:**  
+```
+Start
+End
+(After 2 seconds) Inside Timeout
+```
+✅ **Non-blocking** → Execution continues while waiting for the timeout.  
+
+---
+
+## **🟢 4️⃣ How JavaScript Handles Asynchronous Code?**  
+JavaScript uses the **Event Loop** to manage async tasks via:  
+1️⃣ **Callback Functions** → Used in older asynchronous programming.  
+2️⃣ **Promises** → More structured alternative to callbacks.  
+3️⃣ **Async/Await** → Syntactic sugar over Promises for cleaner code.  
+
+---
+
+## **🟢 5️⃣ Techniques for Handling Asynchronous Code**  
+
+### **1️⃣ Callbacks (Old Approach, Causes Callback Hell)**  
+```js
+function fetchData(callback) {
+    setTimeout(() => {
+        console.log("Data Fetched");
+        callback();
+    }, 2000);
+}
+fetchData(() => console.log("Processing Data"));
+```
+🚨 **Issue:** Nested callbacks lead to **callback hell**, making the code hard to maintain.  
+
+---
+
+### **2️⃣ Promises (Modern Approach)**
+```js
+function fetchData() {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve("Data Fetched"), 2000);
+    });
+}
+
+fetchData()
+    .then((data) => console.log(data))
+    .catch((error) => console.log("Error:", error));
+```
+✅ **Advantages:**  
+- Avoids callback hell with **chaining**.  
+- Uses `.then()` for handling results and `.catch()` for errors.  
+
+---
+
+### **3️⃣ Async/Await (Best Approach)**
+```js
+async function fetchData() {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve("Data Fetched"), 2000);
+    });
+}
+
+async function getData() {
+    console.log("Fetching...");
+    let data = await fetchData();
+    console.log(data);
+}
+getData();
+```
+✅ **Advantages:**  
+- **Looks synchronous but is asynchronous.**  
+- **Easier to read and maintain** than promises.  
+- Handles errors using `try/catch`.  
+
+---
+
+## **🟢 6️⃣ When to Use Each Approach?**  
+| Approach | Use Case | Drawbacks |  
+|-----------|-----------|-----------|  
+| **Callbacks** | Simple async tasks | Leads to callback hell |  
+| **Promises** | Handling multiple async operations | Can still be complex in some cases |  
+| **Async/Await** | Readable & maintainable async code | Requires modern browsers |  
+
+---
+
+## **🟢 7️⃣ Interview Tips**  
+✅ **Explain blocking vs. non-blocking code.**  
+✅ **Mention the event loop.**  
+✅ **Give real-world examples** like API requests, database calls, or timers.  
+✅ **Show preference for async/await** for cleaner code.  
+
+---
+
+Would you like to continue with **Question 12: What is the difference between setTimeout and setInterval?** 🚀
+
+---
+
