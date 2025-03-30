@@ -1568,3 +1568,124 @@ Would you like to continue with **Question 12: What is the difference between se
 
 ---
 
+## **🟢 1️⃣ setTimeout vs. setInterval in JavaScript**  
+
+### **🔹 Why is This Important?**  
+Understanding **setTimeout** and **setInterval** is crucial for handling **delayed and repetitive tasks** in JavaScript, especially in **animations, polling requests, or scheduled executions**.
+
+---
+
+## **🟢 2️⃣ What is `setTimeout`?**  
+📌 **Definition:**  
+- `setTimeout()` executes a function **once** after a specified delay (in milliseconds).  
+- It does **not block execution**—other code continues to run while waiting for the timeout.  
+
+📌 **Syntax:**  
+```js
+setTimeout(function, delay, param1, param2, ...);
+```
+  
+📌 **Example (Delayed Execution):**  
+```js
+console.log("Start");
+setTimeout(() => console.log("Executed after 3 seconds"), 3000);
+console.log("End");
+```
+**Output:**  
+```
+Start
+End
+(After 3 seconds) Executed after 3 seconds
+```
+✅ **Use Case:**  
+- Delaying execution (e.g., showing a popup after some time).  
+
+---
+
+## **🟢 3️⃣ What is `setInterval`?**  
+📌 **Definition:**  
+- `setInterval()` executes a function **repeatedly** at a specified interval.  
+- It continues running until **cleared using `clearInterval()`**.  
+
+📌 **Syntax:**  
+```js
+setInterval(function, interval, param1, param2, ...);
+```
+  
+📌 **Example (Repeated Execution Every 2 Seconds):**  
+```js
+let count = 0;
+let intervalId = setInterval(() => {
+    count++;
+    console.log(`Execution count: ${count}`);
+    if (count === 5) clearInterval(intervalId);  // Stops after 5 executions
+}, 2000);
+```
+**Output:**  
+```
+(After 2 sec) Execution count: 1
+(After 4 sec) Execution count: 2
+(After 6 sec) Execution count: 3
+(After 8 sec) Execution count: 4
+(After 10 sec) Execution count: 5
+```
+✅ **Use Case:**  
+- Updating UI elements (e.g., digital clocks, progress bars).  
+- Fetching data repeatedly at intervals (e.g., polling an API).  
+
+---
+
+## **🟢 4️⃣ Key Differences Between `setTimeout` and `setInterval`**  
+
+| Feature | `setTimeout` | `setInterval` |  
+|---------|-------------|--------------|  
+| **Execution** | Runs once after a delay | Runs repeatedly at intervals |  
+| **Blocking** | Non-blocking | Non-blocking |  
+| **Clearing** | `clearTimeout(timeoutID)` | `clearInterval(intervalID)` |  
+| **Use Cases** | Delayed execution (e.g., popups) | Repetitive tasks (e.g., clock updates) |  
+
+---
+
+## **🟢 5️⃣ How to Stop `setTimeout` and `setInterval`?**  
+- `clearTimeout(timeoutID)` → Cancels a scheduled timeout.  
+- `clearInterval(intervalID)` → Stops repeated execution.  
+
+📌 **Example (Clearing `setTimeout`)**  
+```js
+let timeoutID = setTimeout(() => console.log("This won't run"), 5000);
+clearTimeout(timeoutID);  // Cancels the timeout before it executes
+```
+
+📌 **Example (Clearing `setInterval`)**  
+```js
+let counter = 0;
+let intervalID = setInterval(() => {
+    console.log(`Count: ${++counter}`);
+    if (counter === 3) clearInterval(intervalID);  // Stops after 3 executions
+}, 1000);
+```
+
+---
+
+## **🟢 6️⃣ When to Use `setTimeout` vs. `setInterval`?**  
+| **Scenario** | **Use** |  
+|-------------|--------|  
+| Execute a function **once after a delay** | ✅ `setTimeout()` |  
+| Execute a function **at fixed intervals** | ✅ `setInterval()` |  
+| Need to **schedule a delayed API call** | ✅ `setTimeout()` |  
+| Need to **update UI periodically** | ✅ `setInterval()` |  
+
+---
+
+## **🟢 7️⃣ Interview Tips**  
+✅ **Mention the event loop**—JavaScript does not block execution while waiting for `setTimeout` or `setInterval`.  
+✅ **Explain how to clear intervals** to prevent memory leaks.  
+✅ **Discuss use cases**—e.g., `setTimeout` for animations, `setInterval` for clocks.  
+✅ **Show practical examples** of using `clearTimeout` and `clearInterval`.  
+
+---
+
+Would you like to continue with **Question 13: What is Debouncing and Throttling in JavaScript?** 🚀
+
+---
+
