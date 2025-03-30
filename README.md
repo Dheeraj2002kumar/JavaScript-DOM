@@ -354,3 +354,62 @@ Awesome! Here are some **hands-on coding challenges** related to **DOM (Document
 - **Ask me for mock interview questions** if you want a challenge!  
 
 Would you like **more advanced DOM/BOM tasks**, or should we go for **mock interview Q&A** next? 🚀
+
+---
+### **1️⃣ What is the DOM? How does JavaScript interact with it?**  
+
+#### **What is the DOM?**  
+- **DOM (Document Object Model)** is a programming interface that represents an HTML or XML document as a **tree-like structure** where each element is a **node**.  
+- It allows JavaScript to **access, modify, and manipulate** web pages dynamically.  
+
+#### **How does JavaScript interact with the DOM?**  
+JavaScript provides various methods to interact with the DOM:  
+
+1. **Selecting Elements:**  
+   - `document.getElementById('id')` → Selects an element by ID.  
+   - `document.getElementsByClassName('class')` → Selects elements by class.  
+   - `document.querySelector('.selector')` → Selects the first matching element.  
+   - `document.querySelectorAll('.selector')` → Selects all matching elements.  
+
+2. **Modifying Elements:**  
+   - `element.innerHTML = "New content"` → Changes HTML inside an element.  
+   - `element.textContent = "Text"` → Changes only text content.  
+   - `element.style.color = "red"` → Changes CSS styles dynamically.  
+
+3. **Adding/Removing Elements:**  
+   - `document.createElement('div')` → Creates a new element.  
+   - `parent.appendChild(child)` → Adds an element inside another.  
+   - `element.remove()` → Removes an element from the DOM.  
+
+4. **Handling Events:**  
+   - `element.addEventListener('click', function(){ ... })` → Executes a function when an event occurs.  
+
+#### **Example Code:**  
+```javascript
+// Select an element by ID
+let heading = document.getElementById('title');
+
+// Modify text content
+heading.textContent = "Welcome to JavaScript DOM!";
+
+// Change style dynamically
+heading.style.color = "blue";
+
+// Add an event listener
+heading.addEventListener('click', function() {
+    alert("Heading Clicked!");
+});
+```
+
+---
+
+### ✅ **Interview Tip:**  
+- Keep your explanation **clear and concise**.  
+- Mention that the DOM **updates dynamically** when JavaScript manipulates it.  
+- Be ready to write a **small code snippet** like the one above!  
+
+---
+
+Would you like to proceed with **Question 2: Difference between `innerHTML`, `textContent`, and `innerText`?** 🚀
+
+---
