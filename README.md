@@ -42,6 +42,48 @@ Document
 
 ---
 
+Awesome! Let's do a **Mock Interview** on **JavaScript DOM & BOM**. I'll ask **real interview-style questions** and you answer them as if you're in an actual interview. I'll then give you feedback! 🔥  
+
+---
+
+### **🎤 Round 1: Basic Questions (Easy)**
+1. **What is the DOM? How does JavaScript interact with it?**  
+2. **What is the difference between `innerHTML`, `textContent`, and `innerText`?**  
+3. **What is the difference between `getElementById()`, `getElementsByClassName()`, and `querySelector()`?**  
+4. **What is event delegation, and why is it useful?**  
+5. **What are the different ways to add an event listener to an element?**  
+
+---
+
+### **🚀 Round 2: Intermediate Questions**
+6. **How does the event bubbling and event capturing mechanism work in JavaScript?**  
+7. **What is the difference between `setTimeout()` and `setInterval()`?**  
+8. **How would you dynamically create an element and insert it into the DOM?**  
+9. **How do you prevent the default behavior of an event in JavaScript?**  
+10. **How would you optimize DOM manipulation for better performance?**  
+
+---
+
+### **🔥 Round 3: Advanced Questions**
+11. **What is the Browser Object Model (BOM), and how is it different from the DOM?**  
+12. **How does `window.location` work, and what are its different properties?**  
+13. **How does JavaScript handle async operations in the DOM (e.g., handling large datasets)?**  
+14. **How would you track user activity on a website using the BOM?**  
+15. **How can you detect the user's browser and screen size using JavaScript?**  
+
+---
+
+#### 🏆 **How This Works:**
+- **Try answering the questions one by one** (or pick a few if you prefer).
+- I'll **review your answers** and give **feedback/tips** like a real interviewer!  
+- If you get stuck, I’ll guide you!  
+
+Let’s begin! Answer **Question 1:** **What is the DOM? How does JavaScript interact with it?** 🚀
+
+
+---
+
+
 ## **2️⃣ How to Access and Manipulate the DOM in JavaScript?**  
 ### **1. Selecting Elements**  
 #### **Methods to Select Elements**  
@@ -2959,3 +3001,1267 @@ Would you like to continue with **Question 20: Explain JavaScript Prototype and 
 ---
 
 
+## **🟢 JavaScript Prototype & Prototype Chain: Deep Explanation with Examples**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ **Prototypes** are the foundation of **object inheritance** in JavaScript.  
+✅ Understanding **prototype chaining** helps in optimizing **memory usage** and implementing **OOP concepts**.  
+✅ Interviewers often ask about **prototypes** to test your understanding of **inheritance and object behavior**.  
+
+---
+
+## **🟢 1️⃣ What is a Prototype in JavaScript?**  
+📌 **Definition:**  
+A **prototype** is an object from which other objects inherit properties and methods.  
+
+📌 **Every JavaScript object has an internal link (`__proto__`) pointing to its prototype.**  
+
+📌 **Example of Prototype in Action:**  
+```js
+function Person(name) {
+    this.name = name;
+}
+
+// Adding a method to Person’s prototype
+Person.prototype.sayHello = function() {
+    console.log(`Hello, my name is ${this.name}`);
+};
+
+const user1 = new Person("Dheeraj");
+user1.sayHello(); // Output: Hello, my name is Dheeraj
+```
+✅ **Why?**  
+- `sayHello` is **not** inside the `Person` function but **inside its prototype**.  
+- When `user1.sayHello()` is called, JavaScript **checks the object first**, and if the method isn’t found, it looks in the **prototype**.  
+
+---
+
+## **🟢 2️⃣ What is Prototype Chain?**  
+📌 **Definition:**  
+The **prototype chain** is the mechanism by which JavaScript objects inherit properties and methods from **other objects up the chain**.  
+
+📌 **Example of Prototype Chain:**  
+```js
+console.log(user1.__proto__);          // Points to Person.prototype
+console.log(user1.__proto__.__proto__); // Points to Object.prototype
+console.log(user1.__proto__.__proto__.__proto__); // null (end of the chain)
+```
+✅ **Prototype Chain in Action:**  
+```js
+console.log(user1.toString()); // Works because toString() is from Object.prototype
+```
+- `toString()` is not found in `user1`, so JavaScript looks into `Person.prototype`.  
+- Still not found, so it checks `Object.prototype`.  
+- **Found `toString()` there, so it executes it!**  
+
+📌 **Prototype Chain Diagram:**  
+```
+user1 → Person.prototype → Object.prototype → null
+```
+---
+
+## **🟢 3️⃣ Prototype vs `__proto__` vs `prototype`**
+| Feature         | `prototype` (Constructor Prototype) | `__proto__` (Instance Prototype) |
+|---------------|---------------------------------|------------------------------|
+| What is it?   | Property of constructor function | Property of object instance |
+| Used by?      | Functions only                  | All objects                 |
+| Purpose       | Defines methods for instances   | Points to parent prototype  |
+| Example       | `Person.prototype.sayHello = function(){}` | `user1.__proto__ === Person.prototype` |
+
+---
+
+## **🟢 4️⃣ Inheritance Using Prototypes**
+📌 **Example of Inheritance Using Prototype:**
+```js
+function Animal(name) {
+    this.name = name;
+}
+
+Animal.prototype.makeSound = function() {
+    console.log("Animal sound");
+};
+
+function Dog(name, breed) {
+    Animal.call(this, name); // Call parent constructor
+    this.breed = breed;
+}
+
+// Inheriting Animal's prototype
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+// Adding a method to Dog
+Dog.prototype.bark = function() {
+    console.log(`${this.name} says Woof!`);
+};
+
+const dog1 = new Dog("Bruno", "Labrador");
+dog1.makeSound(); // Output: Animal sound (inherited)
+dog1.bark();      // Output: Bruno says Woof!
+```
+✅ **How it Works?**  
+- `Dog.prototype = Object.create(Animal.prototype);` sets up **prototype inheritance**.  
+- `dog1` first checks `Dog.prototype` → then `Animal.prototype` → then `Object.prototype`.  
+
+---
+
+## **🟢 5️⃣ Object Prototypes & `Object.create()`**  
+📌 **Example of Using `Object.create()` for Inheritance**  
+```js
+const personPrototype = {
+    greet: function() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+};
+
+const person1 = Object.create(personPrototype);
+person1.name = "Dheeraj";
+person1.greet(); // Output: Hello, my name is Dheeraj
+```
+✅ **Why Use `Object.create()`?**  
+- Creates a new object with a **direct prototype link** to another object.  
+- Useful for **creating objects without constructors**.  
+
+---
+
+## **🟢 6️⃣ Interview Questions on Prototypes**
+🔹 **Basic Questions:**  
+1️⃣ What is a prototype in JavaScript?  
+2️⃣ How does JavaScript handle inheritance with prototypes?  
+3️⃣ What is the difference between `prototype` and `__proto__`?  
+
+🔹 **Advanced Questions:**  
+4️⃣ Explain prototype chaining and how JavaScript searches for properties.  
+5️⃣ What happens when you modify `Object.prototype`?  
+6️⃣ What is the difference between class-based inheritance and prototype-based inheritance?  
+
+🔹 **Code-Based Questions:**  
+7️⃣ What will be the output of the following code?  
+```js
+function Car(make) {
+    this.make = make;
+}
+
+Car.prototype.drive = function() {
+    console.log("Driving...");
+};
+
+const car1 = new Car("Toyota");
+car1.drive();
+console.log(car1.__proto__ === Car.prototype);
+console.log(car1.__proto__.__proto__ === Object.prototype);
+console.log(car1.__proto__.__proto__.__proto__);
+```
+8️⃣ How can you achieve multiple levels of inheritance using prototypes?  
+9️⃣ Implement a custom `new` keyword using prototypes.  
+
+---
+
+## **🟢 7️⃣ Interview Tips for Prototypes**
+✅ **Explain How the Prototype Chain Works**: Show how JavaScript looks up properties using `__proto__`.  
+✅ **Write Code on Whiteboard**: Be ready to demonstrate inheritance with constructors and `Object.create()`.  
+✅ **Use Real-World Examples**: Explain how prototype-based inheritance avoids duplicate memory usage.  
+✅ **Highlight Performance Benefits**: Methods in prototypes are shared across all instances, making them **memory efficient**.  
+
+---
+
+Would you like to continue with **Question 21: Explain JavaScript Event Delegation and How it Works?** 🚀
+
+---
+
+## **🟢 JavaScript Event Delegation: Explanation & Use Cases**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ Event delegation improves **performance** by handling multiple events efficiently.  
+✅ It’s commonly used in **dynamic UI components** like lists, tables, and infinite scrolling.  
+✅ Interviewers test event delegation to assess knowledge of **event bubbling and optimization techniques**.  
+
+---
+
+## **🟢 1️⃣ What is Event Delegation?**  
+📌 **Definition:**  
+Event delegation is a technique where **a parent element listens for events on its children** instead of adding event listeners to individual child elements.  
+
+📌 **How It Works?**  
+- JavaScript **leverages event bubbling**: when an event occurs on a child, it bubbles up to its ancestors.  
+- Instead of attaching event listeners to each child, you attach one **listener to the parent** and check which child triggered the event.  
+
+📌 **Example (Without Event Delegation - BAD Approach)**  
+```js
+// Adding event listeners to each list item individually
+document.querySelectorAll(".item").forEach(item => {
+    item.addEventListener("click", function() {
+        console.log("Item clicked:", this.textContent);
+    });
+});
+```
+🔴 **Why is this inefficient?**  
+- If new items are added dynamically, **they won’t have event listeners** attached.  
+- **Performance issue** when handling large lists (e.g., 1000+ elements).  
+
+---
+
+## **🟢 2️⃣ How Event Delegation Works (Optimized Approach)**  
+📌 **Example (Using Event Delegation - GOOD Approach)**  
+```js
+document.getElementById("list").addEventListener("click", function(event) {
+    if (event.target.classList.contains("item")) {
+        console.log("Item clicked:", event.target.textContent);
+    }
+});
+```
+✅ **Why is this better?**  
+- Only **one event listener** is added to the parent (`#list`), improving performance.  
+- Works for **dynamically added items** without extra code.  
+
+---
+
+## **🟢 3️⃣ How Event Bubbling Helps in Event Delegation**  
+📌 **Event Bubbling Mechanism:**  
+When a child element triggers an event, the event propagates **upward** through its parent elements.  
+
+📌 **Example of Bubbling:**  
+```html
+<ul id="parent">
+    <li class="child">Click Me</li>
+</ul>
+
+<script>
+document.getElementById("parent").addEventListener("click", function() {
+    console.log("Parent clicked!");
+});
+
+document.querySelector(".child").addEventListener("click", function() {
+    console.log("Child clicked!");
+});
+</script>
+```
+✅ **Output when clicking on `<li>`:**  
+```
+Child clicked!
+Parent clicked!
+```
+🔹 Since events bubble **up**, the parent also detects the click.  
+
+---
+
+## **🟢 4️⃣ Real-World Use Cases of Event Delegation**  
+
+🔹 **1️⃣ Handling Clicks in Dynamic Lists (Like E-commerce Filters)**  
+```js
+document.getElementById("product-list").addEventListener("click", function(event) {
+    if (event.target.classList.contains("product-item")) {
+        console.log("Selected Product:", event.target.dataset.id);
+    }
+});
+```
+✅ **Newly added `<li class="product-item">` elements will automatically work!**  
+
+🔹 **2️⃣ Improving Performance in Large Tables (E.g., User Management Panel)**  
+```js
+document.getElementById("user-table").addEventListener("click", function(event) {
+    if (event.target.tagName === "BUTTON") {
+        console.log("User Action on:", event.target.parentElement.dataset.userId);
+    }
+});
+```
+✅ **Avoids adding event listeners to thousands of buttons!**  
+
+🔹 **3️⃣ Capturing Form Inputs (E.g., Handling Input Changes in Forms Dynamically)**  
+```js
+document.getElementById("form-container").addEventListener("input", function(event) {
+    if (event.target.matches("input[type='text']")) {
+        console.log("Typing:", event.target.value);
+    }
+});
+```
+✅ **Detects typing in any dynamically added `<input>` elements.**  
+
+---
+
+## **🟢 5️⃣ Interview Questions on Event Delegation**
+🔹 **Basic Questions:**  
+1️⃣ What is event delegation, and how does it work?  
+2️⃣ What is event bubbling, and why is it important for event delegation?  
+
+🔹 **Advanced Questions:**  
+3️⃣ What is the difference between event delegation and event capturing?  
+4️⃣ How does event delegation improve performance in large applications?  
+5️⃣ What happens if `event.stopPropagation()` is used inside a delegated event listener?  
+
+🔹 **Code-Based Questions:**  
+6️⃣ What will be the output of this code?  
+```js
+document.getElementById("parent").addEventListener("click", function(event) {
+    console.log("Parent clicked");
+    event.stopPropagation();
+});
+
+document.querySelector(".child").addEventListener("click", function() {
+    console.log("Child clicked");
+});
+```
+✅ **Answer:** Only `"Child clicked"` will be logged because `event.stopPropagation()` prevents bubbling to the parent.  
+
+---
+
+## **🟢 6️⃣ Key Takeaways for Interviews**
+✅ **Event delegation optimizes performance** by reducing the number of event listeners.  
+✅ **Uses event bubbling** to detect events on dynamically added elements.  
+✅ **Best for scenarios with dynamic elements** like lists, tables, or form inputs.  
+✅ **Remember `event.target`** to determine which child element triggered the event.  
+✅ **Be ready to explain how it improves performance** over direct event listeners.  
+
+---
+
+Would you like to continue with **Question 22: What is JavaScript Currying and Why is it Useful?** 🚀
+
+---
+
+## **🟢 JavaScript Currying: Explanation & Use Cases**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ Currying is a fundamental concept in **functional programming**.  
+✅ It helps write **more reusable and composable** functions.  
+✅ Interviewers test currying to evaluate **closure understanding and advanced JavaScript concepts**.  
+
+---
+
+## **🟢 1️⃣ What is Currying in JavaScript?**  
+📌 **Definition:**  
+Currying is a technique in functional programming where a function with **multiple arguments** is transformed into a sequence of functions, each taking **a single argument**.  
+
+📌 **Why Use Currying?**  
+- **Increases reusability** by breaking functions into smaller parts.  
+- **Enhances readability** by making functions more declarative.  
+- **Allows partial application**, where you can preset arguments.  
+
+📌 **Example of a Normal Function:**  
+```js
+function add(a, b, c) {
+    return a + b + c;
+}
+console.log(add(2, 3, 4)); // Output: 9
+```
+🔴 **Issue?**  
+- You must always pass all three arguments at once.  
+- No flexibility for **presetting** values.  
+
+---
+
+## **🟢 2️⃣ How Currying Works**  
+📌 **Currying Example:**  
+```js
+function curryAdd(a) {
+    return function(b) {
+        return function(c) {
+            return a + b + c;
+        };
+    };
+}
+
+console.log(curryAdd(2)(3)(4)); // Output: 9
+```
+✅ **Breaking it Down:**  
+1️⃣ `curryAdd(2)` returns a function expecting `b`.  
+2️⃣ `curryAdd(2)(3)` returns another function expecting `c`.  
+3️⃣ `curryAdd(2)(3)(4)` computes `2 + 3 + 4 = 9`.  
+
+📌 **Converting a Normal Function to a Curried Function Dynamically**  
+```js
+const curry = (fn) => (...args) =>
+    args.length >= fn.length
+        ? fn(...args)
+        : curry(fn.bind(null, ...args));
+
+function multiply(a, b, c) {
+    return a * b * c;
+}
+
+const curriedMultiply = curry(multiply);
+console.log(curriedMultiply(2)(3)(4)); // Output: 24
+console.log(curriedMultiply(2, 3)(4)); // Works with partial application!
+```
+✅ **Benefits:**  
+- Works with **partial application**.  
+- Handles both **single and multiple arguments** at once.  
+
+---
+
+## **🟢 3️⃣ Real-World Use Cases of Currying**  
+
+🔹 **1️⃣ Function Reusability (Presetting Arguments)**  
+```js
+const greet = (greeting) => (name) => `${greeting}, ${name}!`;
+
+const sayHello = greet("Hello");
+console.log(sayHello("Dheeraj")); // Output: "Hello, Dheeraj!"
+console.log(sayHello("Niharika")); // Output: "Hello, Niharika!"
+```
+✅ **Why is this useful?**  
+- You don’t need to pass `"Hello"` every time.  
+- **Presets first argument** and reuses the function.  
+
+🔹 **2️⃣ Event Handling (Currying for Event Listeners)**  
+```js
+const addEventListenerCurried = (eventType) => (element) => (callback) => {
+    element.addEventListener(eventType, callback);
+};
+
+const clickHandler = addEventListenerCurried("click");
+clickHandler(document.getElementById("btn"))(() => console.log("Button Clicked!"));
+```
+✅ **Why is this useful?**  
+- Helps create **modular, reusable event listeners**.  
+- Keeps code **clean and readable**.  
+
+🔹 **3️⃣ API Calls with Dynamic Endpoints**  
+```js
+const fetchData = (baseURL) => (endpoint) => (id) =>
+    fetch(`${baseURL}/${endpoint}/${id}`)
+        .then(response => response.json())
+        .then(data => console.log(data));
+
+const api = fetchData("https://api.example.com");
+const userApi = api("users");
+userApi(123); // Fetch user with ID 123
+userApi(456); // Fetch user with ID 456
+```
+✅ **Why is this useful?**  
+- Predefines the **base URL**, making API calls more structured.  
+
+---
+
+## **🟢 4️⃣ Interview Questions on Currying**  
+🔹 **Basic Questions:**  
+1️⃣ What is currying in JavaScript?  
+2️⃣ How does currying improve code reusability?  
+
+🔹 **Advanced Questions:**  
+3️⃣ What is the difference between currying and partial application?  
+4️⃣ How would you implement a generic currying function in JavaScript?  
+
+🔹 **Code-Based Questions:**  
+5️⃣ What will be the output of this code?  
+```js
+const curriedSum = (a) => (b) => (c) => a + b + c;
+console.log(curriedSum(1)(2)(3)); 
+console.log(curriedSum(1)(2)); 
+```
+✅ **Answer:**  
+- `curriedSum(1)(2)(3)` outputs `6`.  
+- `curriedSum(1)(2)` returns a function expecting `c`.  
+
+---
+
+## **🟢 5️⃣ Key Takeaways for Interviews**  
+✅ **Currying converts a function of multiple arguments into a series of single-argument functions.**  
+✅ **Enhances reusability** by allowing partial application.  
+✅ **Helps in event handling, API calls, and functional programming.**  
+✅ **Can be implemented manually or using libraries like Lodash (`_.curry`).**  
+✅ **Great for structuring complex logic into smaller, more manageable functions.**  
+
+---
+
+Would you like to continue with **Question 23: What is Debouncing and Throttling in JavaScript?** 🚀
+
+---
+
+## **🟢 JavaScript Debouncing and Throttling: Explanation & Use Cases**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ Helps in **performance optimization** for high-frequency events.  
+✅ Used in **search inputs, scrolling, resizing, and API calls**.  
+✅ Interviewers use this topic to test **event handling and optimization skills**.  
+
+---
+
+## **🟢 1️⃣ What is Debouncing in JavaScript?**  
+📌 **Definition:**  
+Debouncing is a technique used to **limit the execution of a function** that fires repeatedly by delaying its execution **until after a specified delay has passed** since the last invocation.  
+
+📌 **Where is Debouncing Used?**  
+- **Search Bar Auto-Suggestions** (Waits until the user stops typing before making an API request).  
+- **Window Resize Events** (Prevents multiple calculations while resizing).  
+- **Form Validations** (Validates after the user stops typing).  
+
+📌 **Debouncing Example (Search Bar Auto-Suggestions):**  
+```js
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+function searchAPI(query) {
+    console.log("Fetching search results for:", query);
+}
+
+const debouncedSearch = debounce(searchAPI, 300);
+
+// Simulating user typing
+debouncedSearch("Ja");  
+debouncedSearch("Jav");  
+debouncedSearch("Java"); // Only this will trigger after 300ms
+```
+✅ **How It Works?**  
+- If the user types `"Jav"` and `"Java"` quickly, only `"Java"` triggers the API request.  
+- Prevents unnecessary API calls and improves **performance**.  
+
+---
+
+## **🟢 2️⃣ What is Throttling in JavaScript?**  
+📌 **Definition:**  
+Throttling ensures that a function **executes at most once in a specified interval**, even if triggered multiple times.  
+
+📌 **Where is Throttling Used?**  
+- **Handling Scroll Events** (Running heavy computations only at intervals).  
+- **Click Events** (Avoids multiple clicks on a button).  
+- **Fetching Data at Regular Intervals**.  
+
+📌 **Throttling Example (Handling Window Scroll Events):**  
+```js
+function throttle(func, limit) {
+    let lastCall = 0;
+    return function (...args) {
+        let now = Date.now();
+        if (now - lastCall >= limit) {
+            lastCall = now;
+            func.apply(this, args);
+        }
+    };
+}
+
+function logScroll() {
+    console.log("User scrolled at:", Date.now());
+}
+
+const throttledScroll = throttle(logScroll, 1000);
+window.addEventListener("scroll", throttledScroll);
+```
+✅ **How It Works?**  
+- Even if the user **scrolls continuously**, `logScroll()` executes **only once per second** (1000ms).  
+- **Prevents excessive function calls**, reducing performance overhead.  
+
+---
+
+## **🟢 3️⃣ Differences Between Debouncing and Throttling**  
+
+| Feature        | Debouncing | Throttling |
+|---------------|-----------|------------|
+| **Definition** | Executes a function **after a delay** since the last trigger. | Executes a function **at most once in a specified interval**. |
+| **Best For** | Input fields, search suggestions, API calls. | Scroll events, resizing, button clicks. |
+| **Behavior** | Delays function execution until user **stops triggering** the event. | Ensures function runs at **regular intervals**, even if triggered continuously. |
+| **Use Case** | Waiting for user to **stop typing** before fetching search results. | Limiting **scroll event handlers** to run once per second. |
+
+✅ **Key Difference:**  
+- **Debouncing** waits **until the user stops performing an action** before running the function.  
+- **Throttling** ensures the function runs **at controlled intervals, even during continuous events**.  
+
+---
+
+## **🟢 4️⃣ Real-World Use Cases in Projects**  
+
+🔹 **1️⃣ Search Bar with Debouncing**  
+```js
+const debouncedSearch = debounce((query) => console.log("Searching for:", query), 500);
+document.getElementById("searchBox").addEventListener("input", (e) => debouncedSearch(e.target.value));
+```
+✅ **Why?**  
+- Reduces **API calls** for each keystroke.  
+
+🔹 **2️⃣ Window Resize with Debouncing**  
+```js
+const handleResize = debounce(() => console.log("Window resized!"), 300);
+window.addEventListener("resize", handleResize);
+```
+✅ **Why?**  
+- Prevents **unnecessary calculations** while resizing.  
+
+🔹 **3️⃣ Scroll Event with Throttling**  
+```js
+const throttledScroll = throttle(() => console.log("User is scrolling..."), 1000);
+window.addEventListener("scroll", throttledScroll);
+```
+✅ **Why?**  
+- Ensures **smooth performance** during heavy scroll events.  
+
+---
+
+## **🟢 5️⃣ Interview Questions on Debouncing & Throttling**  
+🔹 **Basic Questions:**  
+1️⃣ What is the difference between debouncing and throttling?  
+2️⃣ When should you use debouncing vs. throttling?  
+
+🔹 **Advanced Questions:**  
+3️⃣ How would you implement a debounce function from scratch?  
+4️⃣ How does throttling help improve performance in event handling?  
+
+🔹 **Code-Based Questions:**  
+5️⃣ What will be the output of this code?  
+```js
+const throttledFn = throttle(() => console.log("Event Triggered"), 2000);
+throttledFn();
+throttledFn();
+setTimeout(throttledFn, 1000);
+setTimeout(throttledFn, 2500);
+```
+✅ **Answer:**  
+- `"Event Triggered"` will **execute immediately**.  
+- Second call **within 2 seconds is ignored**.  
+- Call at 1000ms is **ignored**.  
+- Call at 2500ms **executes**.  
+
+---
+
+## **🟢 6️⃣ Key Takeaways for Interviews**  
+✅ **Debouncing** delays execution **until the user stops triggering the event**.  
+✅ **Throttling** limits execution **to once per fixed time interval**.  
+✅ **Debouncing is great for search inputs & form validation**.  
+✅ **Throttling is best for scroll events & window resizing**.  
+✅ **Both are essential for optimizing high-frequency event handling**.  
+
+---
+
+Would you like to continue with **Question 24: What is the JavaScript Event Loop?** 🚀
+
+---
+
+## **🟢 JavaScript Event Loop: Explanation & Interview Guide**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ **Fundamental Concept:** JavaScript is **single-threaded**, so understanding how it handles asynchronous tasks is crucial.  
+✅ **Common Interview Topic:** Questions on **callbacks, promises, and async/await** often require knowledge of the event loop.  
+✅ **Practical Use Case:** Helps in optimizing performance and avoiding issues like **blocking operations**.  
+
+---
+
+## **🟢 1️⃣ What is the JavaScript Event Loop?**  
+
+📌 **Definition:**  
+The **JavaScript Event Loop** is a mechanism that allows JavaScript to perform **non-blocking operations** even though it runs on a **single-threaded execution model**.  
+
+📌 **Why Do We Need It?**  
+Since JavaScript is single-threaded (can execute one task at a time), **the event loop manages asynchronous tasks** like:  
+- **setTimeout, setInterval**  
+- **Fetching API Data (fetch, XMLHttpRequest)**  
+- **Event Listeners (click, scroll, keypress, etc.)**  
+
+📌 **How It Works?**  
+JavaScript has **three main components** that work together:  
+1️⃣ **Call Stack** → Executes synchronous code.  
+2️⃣ **Web APIs** → Handles asynchronous tasks like timers, fetch requests, etc.  
+3️⃣ **Task Queues & Microtask Queues** → Stores callbacks for execution once the call stack is empty.  
+
+---
+
+## **🟢 2️⃣ Event Loop Execution Flow (Step by Step)**  
+1️⃣ **JS Executes Synchronous Code First (Call Stack)**  
+2️⃣ **Asynchronous Code Moves to Web APIs (setTimeout, fetch, etc.)**  
+3️⃣ **Once Completed, Moves to Task Queues (Callback & Microtask Queue)**  
+4️⃣ **Event Loop Checks If Call Stack is Empty → Executes Pending Tasks**  
+5️⃣ **Microtasks (Promises, MutationObservers) are Executed First**  
+6️⃣ **Macrotasks (setTimeout, setInterval, etc.) Are Processed Next**  
+
+---
+
+## **🟢 3️⃣ Example of JavaScript Event Loop in Action**  
+```js
+console.log("Start"); // 1️⃣ Executes immediately
+
+setTimeout(() => {
+    console.log("Inside setTimeout"); // 5️⃣ Executed last (macrotask)
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("Inside Promise"); // 4️⃣ Executed before setTimeout (microtask)
+});
+
+console.log("End"); // 2️⃣ Executes immediately
+```
+
+✅ **Output:**  
+```
+Start  
+End  
+Inside Promise  
+Inside setTimeout  
+```
+
+✅ **Why?**  
+1️⃣ `"Start"` and `"End"` are synchronous → Executed first.  
+2️⃣ `setTimeout` is placed in **Macrotask Queue** → Executed last.  
+3️⃣ `Promise.then()` is placed in **Microtask Queue** → Executes before macrotasks.  
+
+---
+
+## **🟢 4️⃣ Microtask vs Macrotask Queue (Key Difference)**  
+
+| **Feature** | **Microtask Queue** | **Macrotask Queue** |
+|------------|----------------------|----------------------|
+| **Examples** | `Promise.then()`, `queueMicrotask()` | `setTimeout()`, `setInterval()`, `fetch()` |
+| **Execution Timing** | Executed **immediately after synchronous code** | Executed **after all microtasks complete** |
+| **Priority** | **Higher** (Executes before macrotasks) | **Lower** (Executes after microtasks) |
+
+🔹 **Key Rule:** **Microtasks always execute before Macrotasks!**  
+
+---
+
+## **🟢 5️⃣ Common Interview Questions on Event Loop**  
+
+🔹 **Basic Questions:**  
+1️⃣ What is the JavaScript Event Loop?  
+2️⃣ What is the difference between the Call Stack and Task Queues?  
+3️⃣ How does JavaScript handle asynchronous code?  
+
+🔹 **Advanced Questions:**  
+4️⃣ What is the difference between Microtasks and Macrotasks?  
+5️⃣ What will be the output of this code?  
+
+```js
+console.log("1");
+
+setTimeout(() => {
+    console.log("2");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("3");
+});
+
+console.log("4");
+```
+✅ **Answer:**  
+```
+1  
+4  
+3  
+2  
+```
+👉 **Explanation:**  
+1️⃣ `"1"` and `"4"` → Synchronous, executed first.  
+2️⃣ `setTimeout()` → Goes to Macrotask Queue (executed last).  
+3️⃣ `Promise.then()` → Goes to Microtask Queue (executed before macrotasks).  
+
+🔹 **Tricky Interview Question:**  
+```js
+console.log("A");
+
+setTimeout(() => {
+    console.log("B");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("C");
+    setTimeout(() => console.log("D"), 0);
+});
+
+console.log("E");
+```
+✅ **Output:**  
+```
+A  
+E  
+C  
+B  
+D  
+```
+👉 **Why?**  
+- `"A"` and `"E"` execute **first (synchronous)**.  
+- `"C"` executes **before `setTimeout("B")` (microtask first)**.  
+- `"B"` (macrotask) executes next.  
+- `"D"` (setTimeout inside promise) executes **after all previous macrotasks**.  
+
+---
+
+## **🟢 6️⃣ Real-World Use Cases in Projects**  
+
+🔹 **Handling API Requests Efficiently**  
+```js
+fetch("https://api.example.com/data")
+  .then(response => response.json())
+  .then(data => console.log("Fetched Data:", data))
+  .catch(error => console.error("Error:", error));
+```
+✅ **Why?**  
+- API requests **don’t block the main thread**.  
+- Uses the **event loop and task queues** to handle requests efficiently.  
+
+🔹 **Debouncing with Event Loop (Search Suggestions)**  
+```js
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+document.getElementById("searchBox").addEventListener("input", debounce((e) => {
+    console.log("Search Query:", e.target.value);
+}, 500));
+```
+✅ **Why?**  
+- Prevents **excessive API calls** by ensuring search triggers only **after user stops typing**.  
+
+---
+
+## **🟢 7️⃣ Key Takeaways for Interviews**  
+✅ **JavaScript is single-threaded**, but **event loop manages asynchronous tasks** efficiently.  
+✅ **Call Stack handles synchronous code**, while **task queues handle async tasks**.  
+✅ **Microtasks (Promises) always execute before Macrotasks (setTimeout, setInterval, fetch).**  
+✅ **Understanding this is crucial for handling async JavaScript efficiently**.  
+
+---
+
+Would you like to continue with **Question 25: What is Hoisting in JavaScript?** 🚀
+
+---
+
+## **🟢 Hoisting in JavaScript: Explanation & Interview Guide**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ **Fundamental Concept:** JavaScript’s execution context **prepares variables and functions before execution**, affecting how we write and debug code.  
+✅ **Common Interview Topic:** Interviewers love testing hoisting behavior, especially with `var`, `let`, `const`, and functions.  
+✅ **Avoiding Bugs:** Understanding hoisting prevents **unexpected undefined errors**.  
+
+---
+
+## **🟢 1️⃣ What is Hoisting in JavaScript?**  
+
+📌 **Definition:**  
+**Hoisting is JavaScript’s default behavior of moving variable and function declarations to the top of their containing scope before execution.**  
+
+📌 **How It Works?**  
+- **Variables (`var`, `let`, `const`) and functions are stored in memory before execution begins.**  
+- **Function declarations are fully hoisted, but variables are only hoisted with their declarations (not assignments).**  
+
+---
+
+## **🟢 2️⃣ How Hoisting Works with `var`, `let`, `const`, and Functions**  
+
+### **🔹 `var` (Function Scoped, Hoisted but Undefined)**  
+```js
+console.log(a); // ❌ Undefined (not an error, but no value)
+var a = 10;
+console.log(a); // ✅ 10
+```
+✅ **Why?**  
+- `var a` is **hoisted to the top**, but **only the declaration (`var a`) is hoisted**, not the assignment (`= 10`).  
+- At `console.log(a)`, `a` exists but is **undefined**.  
+
+Equivalent to:
+```js
+var a; // Hoisted
+console.log(a); // Undefined
+a = 10; // Assigned later
+console.log(a); // 10
+```
+
+---
+
+### **🔹 `let` and `const` (Block Scoped, Hoisted but in Temporal Dead Zone)**  
+```js
+console.log(b); // ❌ ReferenceError: Cannot access 'b' before initialization
+let b = 20;
+console.log(b); // ✅ 20
+```
+✅ **Why?**  
+- `let` is **hoisted but placed in the Temporal Dead Zone (TDZ)**.  
+- Accessing `b` before declaration **throws a ReferenceError**.  
+
+---
+
+```js
+console.log(c); // ❌ ReferenceError
+const c = 30;
+console.log(c); // ✅ 30
+```
+✅ **Why?**  
+- `const` is **also hoisted but in the Temporal Dead Zone**.  
+- Unlike `var`, you **must initialize `const` immediately**.  
+
+---
+
+### **🔹 Function Hoisting (Fully Hoisted for Declarations, Not Expressions)**  
+
+#### ✅ **Function Declaration (Hoisted Completely)**
+```js
+hello(); // ✅ Works fine
+function hello() {
+    console.log("Hello, world!");
+}
+```
+✅ **Why?**  
+- Function declarations **are fully hoisted**, so calling `hello()` before its definition **works fine**.  
+
+---
+
+#### ❌ **Function Expression (Not Hoisted)**
+```js
+greet(); // ❌ TypeError: greet is not a function
+var greet = function () {
+    console.log("Hello!");
+};
+```
+✅ **Why?**  
+- `var greet` is **hoisted as undefined**, so `greet()` is called before it is assigned the function.  
+
+---
+
+## **🟢 3️⃣ Temporal Dead Zone (TDZ) & Hoisting with `let` & `const`**  
+
+📌 **What is the Temporal Dead Zone?**  
+The **TDZ is the time between variable creation and its declaration** where accessing the variable causes a `ReferenceError`.  
+
+```js
+console.log(x); // ❌ ReferenceError
+let x = 5;
+console.log(x); // ✅ 5
+```
+✅ **Why?**  
+- `let x = 5;` is hoisted, but **until execution reaches the declaration, `x` is in the TDZ.**  
+- **Accessing `x` before its declaration causes an error.**  
+
+---
+
+## **🟢 4️⃣ Hoisting Order: What Gets Hoisted First?**  
+1️⃣ **Function Declarations (Fully Hoisted)**  
+2️⃣ **Variable Declarations (`var`)**  
+3️⃣ **`let` and `const` (Hoisted but Uninitialized – Temporal Dead Zone)**  
+4️⃣ **Function Expressions (Hoisted but Undefined, if declared with `var`)**  
+
+---
+
+## **🟢 5️⃣ Common Interview Questions on Hoisting**  
+
+### **Q1: What will be the output?**
+```js
+console.log(x);
+var x = 5;
+console.log(x);
+```
+✅ **Answer:**  
+```
+undefined  
+5  
+```
+👉 **Explanation:**  
+- `var x` is **hoisted as `undefined`**.  
+- **Only after the assignment (`x = 5`) does `x` hold a value.**  
+
+---
+
+### **Q2: What will be the output?**
+```js
+console.log(y);
+let y = 10;
+console.log(y);
+```
+✅ **Answer:**  
+```
+ReferenceError: Cannot access 'y' before initialization  
+```
+👉 **Explanation:**  
+- `y` is **hoisted but in the Temporal Dead Zone** → Access before initialization throws an error.  
+
+---
+
+### **Q3: What happens with function hoisting?**
+```js
+hello();
+function hello() {
+    console.log("Hi!");
+}
+```
+✅ **Answer:**  
+```
+Hi!
+```
+👉 **Explanation:**  
+- Function **declarations are fully hoisted**, so calling `hello()` before definition **works fine**.  
+
+---
+
+### **Q4: What happens with function expressions?**
+```js
+greet();
+var greet = function() {
+    console.log("Hey there!");
+};
+```
+✅ **Answer:**  
+```
+TypeError: greet is not a function  
+```
+👉 **Explanation:**  
+- `var greet` is **hoisted as undefined**, so `greet()` is undefined at the time of execution.  
+
+---
+
+## **🟢 6️⃣ Real-World Use Cases in Projects**  
+
+🔹 **Avoiding Hoisting Issues with `let` and `const`**  
+```js
+// ✅ Best practice: Declare variables at the top
+let user = "Dheeraj";
+const age = 22;
+
+console.log(user, age);
+```
+✅ **Why?**  
+- Prevents **TDZ errors** and **improves code readability**.  
+
+🔹 **Using Function Expressions Instead of Hoisted Functions**  
+```js
+// ❌ Function Declaration (Hoisted)
+function getData() {
+    return "Fetching data...";
+}
+
+// ✅ Better approach: Function Expression
+const getData = () => "Fetching data...";
+console.log(getData());
+```
+✅ **Why?**  
+- Prevents unexpected hoisting issues when **function definitions change dynamically**.  
+
+---
+
+## **🟢 7️⃣ Key Takeaways for Interviews**  
+✅ **Hoisting moves function and variable declarations to the top before execution.**  
+✅ **`var` is hoisted but initialized as `undefined`, while `let` & `const` remain in the Temporal Dead Zone (TDZ).**  
+✅ **Function declarations are fully hoisted, but function expressions are not.**  
+✅ **Avoid `var` for better scoping and predictability; use `let` and `const`.**  
+
+---
+
+Would you like to continue with **Question 26: What is Closures in JavaScript?** 🚀
+
+---
+
+## **🟢 Closures in JavaScript: Explanation & Interview Guide**  
+
+### **🔹 Why is This Important for Interviews?**  
+✅ **Fundamental Concept:** Closures allow **functions to retain access to their lexical scope** even after their outer function has finished execution.  
+✅ **Common Interview Topic:** Many **JavaScript interview questions** are based on closures, especially for concepts like **data hiding, memoization, and callbacks**.  
+✅ **Real-World Usage:** Used in **event handlers, setTimeout, function currying, and module patterns**.  
+
+---
+
+## **🟢 1️⃣ What is a Closure in JavaScript?**  
+
+📌 **Definition:**  
+A **closure is a function that has access to its outer function’s variables even after the outer function has returned.**  
+
+📌 **How It Works?**  
+- Functions in JavaScript **remember the variables of the scope in which they were created**.  
+- Even after the **outer function is executed and removed from the call stack, its variables remain accessible to the inner function**.  
+
+---
+
+## **🟢 2️⃣ Understanding Closures with Examples**  
+
+### **🔹 Basic Closure Example**  
+```js
+function outer() {
+    let name = "Dheeraj";  // 🔹 Outer function variable
+    function inner() {
+        console.log(name);  // 🔹 Inner function accesses outer variable
+    }
+    return inner;
+}
+
+const myFunction = outer(); // myFunction is now inner()
+myFunction();  // ✅ Output: "Dheeraj"
+```
+✅ **Why?**  
+- `inner()` **remembers the `name` variable even after `outer()` has finished execution**.  
+- The function `inner()` **forms a closure around `name`** and can still access it.  
+
+---
+
+### **🔹 Closure with a Counter Example (Encapsulation)**  
+```js
+function counter() {
+    let count = 0;  // 🔹 Private variable (not accessible directly)
+    
+    return function() {
+        count++;  // 🔹 Inner function modifies outer variable
+        console.log(count);
+    };
+}
+
+const increment = counter();
+increment(); // ✅ Output: 1
+increment(); // ✅ Output: 2
+increment(); // ✅ Output: 3
+```
+✅ **Why?**  
+- The variable `count` **is not directly accessible** from outside.  
+- Each call to `increment()` **modifies the existing `count` variable**, demonstrating **data hiding using closures**.  
+
+---
+
+### **🔹 Closures with `setTimeout` (Common Interview Question)**  
+```js
+function delayMessage(msg, time) {
+    setTimeout(function() {
+        console.log(msg);
+    }, time);
+}
+
+delayMessage("Hello, world!", 2000); // ✅ Prints "Hello, world!" after 2 seconds
+```
+✅ **Why?**  
+- Even though `delayMessage()` **executes and is removed from the call stack**,  
+  the **inner function still holds access to `msg`**, which is why it works inside `setTimeout()`.  
+
+---
+
+## **🟢 3️⃣ Common Interview Questions on Closures**  
+
+### **Q1: What will be the output of this closure-based loop?**
+```js
+for (var i = 1; i <= 3; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 1000);
+}
+```
+✅ **Answer:**  
+```
+4
+4
+4
+```
+👉 **Explanation:**  
+- `var i` is **function-scoped**, so all `setTimeout` callbacks refer to the **same i (which becomes 4 after the loop ends)**.  
+
+✅ **Corrected Version (Using Closures and `let`)**  
+```js
+for (let i = 1; i <= 3; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 1000);
+}
+```
+✅ **Output:**  
+```
+1
+2
+3
+```
+👉 **Explanation:**  
+- `let` creates a **new block-scoped variable `i` for each iteration**, so each function gets the correct value.  
+
+---
+
+### **Q2: How do closures help in private variables?**
+```js
+function bankAccount(initialBalance) {
+    let balance = initialBalance;  // Private variable
+
+    return {
+        deposit: function(amount) {
+            balance += amount;
+            console.log(`Deposited: ${amount}, New Balance: ${balance}`);
+        },
+        withdraw: function(amount) {
+            if (amount <= balance) {
+                balance -= amount;
+                console.log(`Withdrew: ${amount}, New Balance: ${balance}`);
+            } else {
+                console.log("Insufficient funds");
+            }
+        }
+    };
+}
+
+const myAccount = bankAccount(1000);
+myAccount.deposit(500);  // ✅ Deposited: 500, New Balance: 1500
+myAccount.withdraw(200); // ✅ Withdrew: 200, New Balance: 1300
+console.log(myAccount.balance); // ❌ Undefined (not directly accessible)
+```
+✅ **Why?**  
+- `balance` **is not directly accessible from outside the function**.  
+- Only `deposit()` and `withdraw()` **can modify `balance`, ensuring encapsulation**.  
+
+---
+
+### **Q3: What will be the output of this closure-based function?**
+```js
+function multiplyBy(x) {
+    return function(y) {
+        return x * y;
+    };
+}
+
+const multiplyBy5 = multiplyBy(5);
+console.log(multiplyBy5(10)); // ❓
+```
+✅ **Answer:**  
+```
+50
+```
+👉 **Explanation:**  
+- `multiplyBy(5)` **returns a function** that remembers `x = 5`.  
+- `multiplyBy5(10)` **executes with `y = 10`, so 5 * 10 = 50**.  
+
+✅ **Use Case:**  
+- This is **function currying**, a common functional programming technique.  
+
+---
+
+## **🟢 4️⃣ Real-World Use Cases of Closures**  
+
+### **🔹 1. Event Listeners (DOM Manipulation)**
+```js
+function clickHandler(message) {
+    return function() {
+        console.log(message);
+    };
+}
+
+document.getElementById("myButton").addEventListener("click", clickHandler("Button clicked!"));
+```
+✅ **Why?**  
+- Each button click **remembers the message variable**, creating a **closure inside the event listener**.  
+
+---
+
+### **🔹 2. Memoization (Performance Optimization)**
+```js
+function memoizedAddition() {
+    let cache = {}; // 🔹 Stores computed results
+
+    return function(num) {
+        if (num in cache) {
+            console.log("Fetching from cache:", cache[num]);
+        } else {
+            console.log("Calculating result...");
+            cache[num] = num + 10;
+        }
+        return cache[num];
+    };
+}
+
+const add10 = memoizedAddition();
+console.log(add10(5)); // ✅ Calculating result...
+console.log(add10(5)); // ✅ Fetching from cache: 15
+```
+✅ **Why?**  
+- **Reduces redundant calculations** by storing results in `cache`.  
+- Uses **closures to maintain a private cache** across function calls.  
+
+---
+
+## **🟢 5️⃣ Key Takeaways for Interviews**  
+✅ **Closures allow a function to retain access to its lexical scope even after its outer function has executed.**  
+✅ **Used for encapsulation (private variables), event handling, function currying, and memoization.**  
+✅ **Functions inside `setTimeout`, event listeners, and loops commonly use closures.**  
+✅ **Avoid memory leaks by not creating unnecessary closures inside long-running functions.**  
+
+---
