@@ -2164,3 +2164,253 @@ Would you like to continue with **Question 16: What are JavaScript Prototypes an
 
 ---
 
+## **🟢 1️⃣ JavaScript Prototypes: Deep Explanation with Examples**  
+
+### **🔹 Why is This Important?**  
+Prototypes are one of the **most fundamental** concepts in JavaScript and are commonly asked in interviews. Understanding them helps in:  
+✅ **Object-Oriented Programming (OOP)** – Understanding inheritance in JavaScript.  
+✅ **Memory Efficiency** – Sharing methods across multiple objects.  
+✅ **Custom Object Creation** – Creating reusable and extensible objects.  
+
+---
+
+## **🟢 2️⃣ What is a Prototype in JavaScript?**  
+📌 **Definition:**  
+A **prototype** is an object that other objects inherit properties and methods from.  
+
+📌 **How It Works:**  
+- Every JavaScript **object** has an internal property called `[[Prototype]]` (also accessible via `__proto__`).  
+- Objects inherit methods and properties from their prototype.  
+- The **prototype chain** is followed when accessing a property or method.  
+
+📌 **Example of Prototype Inheritance:**  
+```js
+let person = {
+    greet: function() {
+        console.log("Hello!");
+    }
+};
+
+let user = Object.create(person); // user inherits from person
+user.greet(); // Output: Hello!
+```
+✅ **Why does `user.greet()` work?**  
+Even though `greet()` is **not directly** in `user`, JavaScript **checks the prototype** and finds it in `person`.  
+
+---
+
+## **🟢 3️⃣ Prototype Chain: How Inheritance Works**  
+📌 **Prototype chain** is the mechanism through which JavaScript objects inherit properties and methods.  
+
+```js
+function Animal(name) {
+    this.name = name;
+}
+
+Animal.prototype.eat = function() {
+    console.log(`${this.name} is eating.`);
+};
+
+let dog = new Animal("Buddy");
+dog.eat(); // Output: Buddy is eating.
+```
+✅ **What Happens Here?**  
+1️⃣ `dog` doesn't have `eat()`.  
+2️⃣ JavaScript **looks at `dog`'s prototype** (`Animal.prototype`).  
+3️⃣ It finds `eat()` and executes it.  
+
+---
+
+## **🟢 4️⃣ How to Add Methods to a Prototype**  
+📌 Instead of adding methods inside the constructor function (which duplicates them for each object), we can **add them to the prototype**.  
+
+```js
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+// Adding method to prototype
+Person.prototype.sayHello = function() {
+    console.log(`Hello, my name is ${this.name}`);
+};
+
+let user1 = new Person("John", 25);
+let user2 = new Person("Jane", 30);
+
+user1.sayHello(); // Output: Hello, my name is John
+user2.sayHello(); // Output: Hello, my name is Jane
+```
+✅ **Advantage:** `sayHello()` is **shared** among all `Person` objects, improving memory efficiency.  
+
+---
+
+## **🟢 5️⃣ Constructor Functions and Prototypes**  
+📌 **Constructor functions** are used to create objects with shared properties and methods.  
+
+```js
+function Car(brand) {
+    this.brand = brand;
+}
+
+// Adding method to prototype
+Car.prototype.drive = function() {
+    console.log(`${this.brand} is driving.`);
+};
+
+let car1 = new Car("Toyota");
+let car2 = new Car("Honda");
+
+car1.drive(); // Output: Toyota is driving.
+car2.drive(); // Output: Honda is driving.
+```
+✅ **Memory Optimization:** Instead of each `Car` object having its own copy of `drive()`, it is **shared via the prototype**.  
+
+---
+
+## **🟢 6️⃣ Object Prototypes and `Object.create()`**  
+📌 `Object.create()` allows us to create objects with a specific prototype.  
+
+```js
+let animal = {
+    sleep: function() {
+        console.log("Sleeping...");
+    }
+};
+
+let cat = Object.create(animal);
+cat.sleep(); // Output: Sleeping...
+```
+✅ **Why Use `Object.create()`?**  
+It allows **direct inheritance** without using constructor functions.  
+
+---
+
+## **🟢 7️⃣ Prototype vs `__proto__` vs `prototype`**  
+| **Term**       | **Description** |
+|---------------|----------------|
+| `prototype`   | A property on **constructor functions** that stores methods to be inherited. |
+| `__proto__`   | A reference inside **every object** that points to its prototype. |
+| Prototype Chain | A series of objects linked by inheritance. |
+
+📌 **Example:**  
+```js
+function User(name) {
+    this.name = name;
+}
+
+User.prototype.sayHi = function() {
+    console.log(`Hi, ${this.name}!`);
+};
+
+let u = new User("Alice");
+console.log(u.__proto__ === User.prototype); // ✅ True
+```
+
+✅ **Key Understanding:**  
+- `prototype` exists on **functions** (like `User.prototype`).  
+- `__proto__` exists on **objects** (like `u.__proto__`).  
+- They both help in **prototype inheritance**.  
+
+---
+
+## **🟢 8️⃣ Overriding Prototype Methods**  
+📌 **Child objects can override inherited prototype methods.**  
+
+```js
+function Employee(name) {
+    this.name = name;
+}
+
+Employee.prototype.work = function() {
+    console.log(`${this.name} is working.`);
+};
+
+let e1 = new Employee("Bob");
+
+// Overriding work() method
+e1.work = function() {
+    console.log(`${this.name} is coding.`);
+};
+
+e1.work(); // Output: Bob is coding.
+```
+✅ **Why does it work?**  
+JavaScript **first checks the object itself** for the method before looking at the prototype.  
+
+---
+
+## **🟢 9️⃣ Practical Use Cases of Prototypes**  
+
+| **Use Case** | **Description** |
+|-------------|----------------|
+| **OOP in JavaScript** | Implement classes and inheritance efficiently. |
+| **Performance Optimization** | Methods are shared instead of duplicated. |
+| **Extending Built-in Objects** | Add new methods to `Array`, `String`, etc. |
+| **Code Reusability** | Create reusable and extendable objects. |
+
+---
+
+## **🟢 🔟 Real-World Examples of Prototypes**  
+
+### **1️⃣ Extending Built-in Prototypes (Not Recommended for Production)**
+📌 **We can add methods to built-in objects like `Array`, but be careful as it affects all instances.**  
+```js
+Array.prototype.first = function() {
+    return this[0];
+};
+
+let numbers = [10, 20, 30];
+console.log(numbers.first()); // Output: 10
+```
+✅ **Benefit:** Adds custom methods to existing objects.  
+❌ **Risk:** Modifying built-in objects can cause conflicts with libraries.  
+
+---
+
+### **2️⃣ Inheriting from Another Prototype**
+📌 **Using `Object.create()` for inheritance.**  
+```js
+let vehicle = {
+    start: function() {
+        console.log("Starting engine...");
+    }
+};
+
+let bike = Object.create(vehicle);
+bike.start(); // Output: Starting engine...
+```
+✅ **Benefit:** Simple way to create objects with shared behavior.  
+
+---
+
+## **🟢 🔟 Common Interview Questions on Prototypes**  
+🔹 **Basic Questions:**  
+1️⃣ What is a prototype in JavaScript?  
+2️⃣ How does JavaScript handle inheritance using prototypes?  
+3️⃣ What is the difference between `__proto__` and `prototype`?  
+
+🔹 **Advanced Questions:**  
+4️⃣ How does the prototype chain work?  
+5️⃣ Can you override a prototype method?  
+6️⃣ What are the advantages of using prototypes?  
+
+🔹 **Code-Based Questions:**  
+7️⃣ Write a constructor function and add a method using prototype.  
+8️⃣ Create a function factory using prototypes.  
+9️⃣ Explain how prototypes optimize memory usage.  
+
+---
+
+## **🟢 Interview Tips**  
+✅ **Explain prototypes step by step with examples** (constructor function → prototype → chain).  
+✅ **Draw a simple diagram** to show how the prototype chain works.  
+✅ **Mention real-world applications** like extending built-in objects and performance optimization.  
+✅ **Keep it simple and structured.**  
+
+---
+
+Would you like to continue with **Question 17: What are JavaScript Promises and How Do They Work?** 🚀
+
+---
+
