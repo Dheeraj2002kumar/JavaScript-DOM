@@ -1140,3 +1140,187 @@ Would you like to continue with **Question 9: Explain JavaScript Events and Even
 
 ---
 
+## **9️⃣ JavaScript Events and Event Listeners**  
+
+### **🔹 Why is This Important?**  
+Events and event listeners allow JavaScript to respond to user interactions, making web applications dynamic and interactive. They are a crucial concept in frontend development and a common interview topic.
+
+---
+
+## **🟢 1️⃣ What is an Event in JavaScript?**  
+An **event** is an action or occurrence detected by JavaScript, such as:  
+✅ Clicking a button (`click`)  
+✅ Typing in an input field (`input`)  
+✅ Hovering over an element (`mouseover`)  
+✅ Submitting a form (`submit`)  
+
+---
+
+## **🟢 2️⃣ What is an Event Listener?**  
+An **event listener** is a function that waits for a specific event to occur on an element and executes code in response.
+
+### **🟡 Example: Adding an Event Listener**
+```html
+<button id="btn">Click Me</button>
+
+<script>
+    document.getElementById("btn").addEventListener("click", function() {
+        alert("Button Clicked!");
+    });
+</script>
+```
+✅ When the button is clicked, an alert box appears.  
+
+---
+
+## **🟢 3️⃣ Ways to Handle Events in JavaScript**
+### **1️⃣ Inline Event Handler (Not Recommended)**
+```html
+<button onclick="alert('Clicked!')">Click Me</button>
+```
+🚨 **Downside:** Makes the HTML messy and harder to maintain.  
+
+---
+
+### **2️⃣ JavaScript Property Event Handler**
+```html
+<button id="btn">Click Me</button>
+
+<script>
+    document.getElementById("btn").onclick = function() {
+        alert("Clicked!");
+    };
+</script>
+```
+🚨 **Downside:** Only **one** event handler can be assigned per element.  
+
+---
+
+### **3️⃣ addEventListener (Recommended)**
+```javascript
+document.getElementById("btn").addEventListener("click", function() {
+    alert("Clicked using addEventListener!");
+});
+```
+✅ **Allows multiple event listeners on the same element.**  
+✅ **More flexible and maintainable.**  
+
+---
+
+## **🟢 4️⃣ Commonly Used JavaScript Events**
+| Event | Description |
+|-------|-------------|
+| `click` | Fires when an element is clicked. |
+| `mouseover` | Fires when the mouse enters an element. |
+| `mouseout` | Fires when the mouse leaves an element. |
+| `keydown` | Fires when a key is pressed. |
+| `keyup` | Fires when a key is released. |
+| `change` | Fires when an input value changes. |
+| `submit` | Fires when a form is submitted. |
+| `load` | Fires when a page or image loads. |
+
+---
+
+## **🟢 5️⃣ Event Object (`event`)**
+The event object provides **details about the event** that occurred.  
+
+### **🟡 Example: Using `event` Object**
+```javascript
+document.getElementById("btn").addEventListener("click", function(event) {
+    console.log("Event Type:", event.type);
+    console.log("Target Element:", event.target);
+});
+```
+✅ **`event.type`** → Shows the type of event (e.g., "click")  
+✅ **`event.target`** → Returns the element that triggered the event  
+
+---
+
+## **🟢 6️⃣ Event Propagation (Bubbling vs. Capturing)**
+### **🟡 Bubbling (Default)**
+- The event **starts from the target element and moves up** to the parent elements.  
+- Happens **by default** in JavaScript.
+
+### **🟡 Capturing (Trickling Down)**
+- The event **starts from the root element and moves down** to the target.  
+- Enabled by setting `true` as the third parameter in `addEventListener()`.
+
+### **🟡 Example: Event Bubbling vs. Capturing**
+```html
+<div id="parent">
+    <button id="child">Click Me</button>
+</div>
+
+<script>
+    document.getElementById("parent").addEventListener("click", function() {
+        console.log("Parent Clicked!");
+    }, true);  // Capturing Phase
+
+    document.getElementById("child").addEventListener("click", function() {
+        console.log("Child Clicked!");
+    });
+</script>
+```
+🟢 **Clicking the button prints:**  
+```
+Parent Clicked!
+Child Clicked!
+```
+🔵 **If `true` is removed, the output is:**  
+```
+Child Clicked!
+Parent Clicked!
+```
+✅ **Bubbling: Child → Parent** (default)  
+✅ **Capturing: Parent → Child** (when `true` is passed)  
+
+---
+
+## **🟢 7️⃣ Preventing Default Actions**
+Some events trigger default browser behaviors (e.g., form submission, link navigation). We can prevent them using `event.preventDefault()`.  
+
+### **🟡 Example: Preventing Form Submission**
+```html
+<form id="myForm">
+    <input type="text" placeholder="Enter something">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault();  // Prevents form from submitting
+        alert("Form submission prevented!");
+    });
+</script>
+```
+✅ **Prevents the form from refreshing the page.**  
+
+---
+
+## **🟢 8️⃣ Removing Event Listeners**
+Event listeners can be removed using `removeEventListener()`.
+
+### **🟡 Example: Removing an Event Listener**
+```javascript
+function showAlert() {
+    alert("Clicked!");
+    document.getElementById("btn").removeEventListener("click", showAlert);
+}
+
+document.getElementById("btn").addEventListener("click", showAlert);
+```
+✅ **The event listener is removed after the first click.**  
+
+---
+
+## **🟢 9️⃣ Interview Tip**
+- Explain events as **triggers for user interactions** and event listeners as **functions that respond to events**.  
+- Show practical examples like **button clicks, form submissions, and keypress events**.  
+- Discuss **bubbling, capturing, and event delegation** when asked about advanced event handling.  
+
+---
+
+Would you like to continue with **Question 10: Explain Event Delegation in JavaScript?** 🚀
+
+---
+
