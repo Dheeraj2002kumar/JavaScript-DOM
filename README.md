@@ -592,3 +592,167 @@ Would you like to continue with **Question 4: What is the `document` object in J
 
 ---
 
+## **4️⃣ What is the `document` object in JavaScript (DOM)?**  
+
+### **🟢 Definition:**  
+The `document` object is part of the **DOM (Document Object Model)** and represents the entire HTML page. It allows JavaScript to **access, manipulate, and modify** HTML elements dynamically.  
+
+The `document` object is a child of the `window` object:  
+```javascript
+console.log(window.document); // Outputs the entire HTML document
+```
+
+---
+
+## **🟢 Key Properties of the `document` Object**
+### **1️⃣ `document.title` (Get/Set Page Title)**
+✅ **Example:**  
+```javascript
+console.log(document.title); // Get the title
+document.title = "New Title"; // Change the title dynamically
+```
+
+---
+
+### **2️⃣ `document.URL` (Get Current Page URL)**
+✅ **Example:**  
+```javascript
+console.log(document.URL); // Outputs the full URL of the webpage
+```
+
+---
+
+### **3️⃣ `document.body` & `document.head` (Access Body & Head Elements)**
+✅ **Example:**  
+```javascript
+console.log(document.body); // Access the <body> tag
+console.log(document.head); // Access the <head> tag
+```
+
+---
+
+## **🟢 Methods to Select HTML Elements**
+### **1️⃣ `document.getElementById()`** (Select by `id`)  
+✅ **Example:**  
+```javascript
+let heading = document.getElementById("myHeading");
+console.log(heading.innerText); // Get text of the element
+heading.style.color = "blue"; // Change text color
+```
+🔹 *Best for unique elements like `<h1 id="myHeading">Hello</h1>`.*
+
+---
+
+### **2️⃣ `document.getElementsByClassName()`** (Select by `class`)  
+✅ **Example:**  
+```javascript
+let elements = document.getElementsByClassName("myClass");
+console.log(elements[0].innerText); // Access first element
+```
+🔹 *Returns an HTMLCollection (array-like) of matching elements.*
+
+---
+
+### **3️⃣ `document.getElementsByTagName()`** (Select by `tag name`)  
+✅ **Example:**  
+```javascript
+let paragraphs = document.getElementsByTagName("p");
+console.log(paragraphs[0].innerText); // Access first paragraph
+```
+🔹 *Returns all elements of a specific tag, like `<p>`.*
+
+---
+
+### **4️⃣ `document.querySelector()` & `document.querySelectorAll()`**  
+✅ **Example:**  
+```javascript
+let firstDiv = document.querySelector("div"); // Selects the first matching <div>
+let allDivs = document.querySelectorAll("div"); // Selects all <div> elements
+console.log(allDivs.length); // Number of <div> elements
+```
+🔹 *Supports CSS selectors like `#id`, `.class`, `tagname`.*
+
+---
+
+## **🟢 Modifying HTML Content**
+### **1️⃣ Change Text with `.innerText` and `.innerHTML`**  
+✅ **Example:**  
+```javascript
+let myElement = document.getElementById("demo");
+myElement.innerText = "New Text"; // Change text content
+myElement.innerHTML = "<strong>Bold Text</strong>"; // Change with HTML tags
+```
+
+---
+
+### **2️⃣ Change Attributes with `.setAttribute()`**
+✅ **Example:**  
+```javascript
+let img = document.getElementById("myImage");
+img.setAttribute("src", "new-image.jpg"); // Change image source
+img.setAttribute("alt", "New Image Description"); // Change alt text
+```
+
+---
+
+### **3️⃣ Change CSS with `.style`**
+✅ **Example:**  
+```javascript
+let btn = document.getElementById("myButton");
+btn.style.backgroundColor = "red"; // Change button color
+btn.style.fontSize = "20px"; // Change text size
+```
+
+---
+
+## **🟢 Creating & Deleting Elements**
+### **1️⃣ Create a New Element (`document.createElement()`)**
+✅ **Example:**  
+```javascript
+let newPara = document.createElement("p");
+newPara.innerText = "This is a new paragraph!";
+document.body.appendChild(newPara); // Add to the document
+```
+
+---
+
+### **2️⃣ Remove an Element (`element.remove()`)**
+✅ **Example:**  
+```javascript
+let unwantedDiv = document.getElementById("deleteMe");
+unwantedDiv.remove(); // Remove the element from the DOM
+```
+
+---
+
+## **🟢 Event Handling with the `document` Object**
+✅ **Example:**  
+```javascript
+document.getElementById("myButton").addEventListener("click", function() {
+    alert("Button Clicked!");
+});
+```
+🔹 *Adds a click event listener to a button.*
+
+---
+
+## **🟢 DOM vs BOM**
+| Feature | DOM (`document`) | BOM (`window`) |
+|---------|----------------|----------------|
+| Purpose | Manipulates **HTML elements** | Controls **browser features** |
+| Example | `document.getElementById()` | `window.alert()` |
+| Scope | Focuses on webpage content | Focuses on browser behavior |
+
+---
+
+## **✅ Interview Tip:**
+- **Explain that the `document` object is the entry point to DOM manipulation.**
+- **Mention common use cases like modifying content, handling events, and changing styles dynamically.**
+- **Use real-world examples like dynamically updating a webpage or creating interactive UI elements.**
+
+---
+
+Would you like to continue with **Question 5: How does the Event Loop work in JavaScript?** 🚀
+
+---
+
