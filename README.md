@@ -1016,3 +1016,127 @@ Would you like to continue with **Question 8: Explain JavaScript DOM and BOM?** 
 
 ---
 
+## **8️⃣ Explain JavaScript DOM and BOM in Detail**  
+
+### **🔹 Why is This Important?**  
+JavaScript interacts with the webpage using **DOM (Document Object Model)** and **BOM (Browser Object Model)**. These concepts are crucial for **manipulating web pages dynamically** and are commonly asked in interviews.
+
+---
+
+## **🟢 1️⃣ What is DOM (Document Object Model)?**  
+- The **DOM is a tree-like representation** of the HTML document.  
+- JavaScript can **access, modify, add, and delete elements** in the DOM.  
+- **Every HTML element becomes a node** in the DOM.  
+
+### **🟡 Example of an HTML Structure**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Example</title>
+</head>
+<body>
+    <h1 id="heading">Hello, DOM!</h1>
+    <p class="text">This is a paragraph.</p>
+    <button onclick="changeText()">Click Me</button>
+
+    <script>
+        function changeText() {
+            document.getElementById("heading").innerText = "DOM Manipulated!";
+        }
+    </script>
+</body>
+</html>
+```
+✅ **When the button is clicked, the text of `<h1>` changes dynamically!**  
+
+---
+
+### **🟢 2️⃣ Important DOM Methods**
+| Method | Description |
+|--------|------------|
+| `document.getElementById(id)` | Selects an element by its `id`. |
+| `document.getElementsByClassName(className)` | Selects elements by class name. |
+| `document.getElementsByTagName(tagName)` | Selects elements by tag name. |
+| `document.querySelector(selector)` | Selects the first element that matches the CSS selector. |
+| `document.querySelectorAll(selector)` | Selects all elements that match the CSS selector. |
+| `element.innerHTML` | Gets or sets the HTML inside an element. |
+| `element.innerText` | Gets or sets only the text inside an element. |
+| `element.style.property` | Changes CSS properties dynamically. |
+| `element.setAttribute(attr, value)` | Adds or modifies an attribute. |
+| `element.removeAttribute(attr)` | Removes an attribute. |
+
+---
+
+### **🟢 3️⃣ What is BOM (Browser Object Model)?**
+- The **BOM represents the browser itself**, allowing JavaScript to interact with **window, location, history, and navigator**.
+- It enables **control over browser functionality** (e.g., opening new tabs, getting the URL, and controlling browser history).
+
+---
+
+### **🟡 Key BOM Objects**
+| Object | Description |
+|--------|------------|
+| `window` | The global object that represents the browser window. |
+| `document` | Represents the HTML document (part of DOM but accessible via BOM). |
+| `location` | Gets or sets the URL of the current page. |
+| `history` | Allows navigation through the browser’s history. |
+| `navigator` | Provides information about the browser and device. |
+
+---
+
+### **🟢 4️⃣ Important BOM Methods**
+| Method | Description |
+|--------|------------|
+| `window.alert("Hello")` | Shows an alert box. |
+| `window.confirm("Are you sure?")` | Displays a confirmation box (OK/Cancel). |
+| `window.prompt("Enter your name")` | Asks for user input. |
+| `window.open(url, target)` | Opens a new window/tab. |
+| `window.close()` | Closes the current window. |
+| `window.setTimeout(func, ms)` | Runs a function after a delay. |
+| `window.setInterval(func, ms)` | Repeats a function at intervals. |
+| `console.log("Debug message")` | Prints messages in the console. |
+
+---
+
+### **🟢 5️⃣ Example: Using BOM Methods**
+```javascript
+// Alert, Confirm, and Prompt
+alert("Welcome to the website!");  
+let confirmation = confirm("Do you want to proceed?");
+let name = prompt("Enter your name:");
+
+// Open a new tab
+window.open("https://google.com", "_blank");
+
+// Get Current URL
+console.log("Current URL:", window.location.href);
+
+// Reload the page
+window.location.reload();
+```
+---
+
+## **🟢 6️⃣ DOM vs. BOM Comparison**
+| Feature | DOM (Document Object Model) | BOM (Browser Object Model) |
+|---------|-----------------------------|-----------------------------|
+| Definition | Represents the HTML structure | Represents the browser itself |
+| Interaction | Allows JavaScript to manipulate webpage elements | Allows JavaScript to control browser features |
+| Example | `document.getElementById("id")` | `window.alert("Hello!")` |
+| Focus | Handles **HTML elements** | Handles **browser behavior** |
+
+---
+
+## **🟢 7️⃣ Interview Tip**
+- Explain **DOM as the structure of a webpage** and **BOM as the browser functionalities**.
+- Give a **real-world analogy**:  
+  🔹 **DOM = The blueprint of a house (HTML structure)**  
+  🔹 **BOM = The house control panel (window, location, history)**  
+- Show practical **examples** like dynamically changing text (`innerText`), opening a new tab (`window.open`), or getting the URL (`window.location.href`).  
+
+---
+
+Would you like to continue with **Question 9: Explain JavaScript Events and Event Listeners?** 🚀
+
+---
+
