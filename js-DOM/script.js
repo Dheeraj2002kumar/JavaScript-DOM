@@ -59,3 +59,15 @@ document.getElementById("feedbackForm").addEventListener("submit", function(even
 
     document.getElementById("feedbackDisplay").textContent = `Feedback is: ${feedback}`;
 });
+
+// Example 9
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("domStatus").textContent = "DOM fully loaded";
+});
+
+document.getElementById("toggleHighlight").addEventListener("click", function(){
+    let descriptionText = document.getElementById("descriptionText");
+    let changeColor = descriptionText.style.backgroundColor = "yellow";
+    descriptionText.classList.toggle(changeColor);
+})
