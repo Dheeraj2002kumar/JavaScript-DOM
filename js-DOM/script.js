@@ -35,3 +35,9 @@ document.getElementById("removeListTask").addEventListener("click", function () 
     let taskList = document.getElementById("taskList");
     taskList.lastElementChild.remove();
 })
+
+// Example 6 
+
+document.getElementById("clickMeButton").addEventListener("click", function () {
+    alert("Tech Code_");
+})
