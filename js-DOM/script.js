@@ -11,3 +11,12 @@ document.getElementById("highlightFirstCity").addEventListener("click", function
     let citiesList = document.getElementById("citiesList");
     citiesList.firstElementChild.classList.add("first-list");
 })
+
+// Example 3
+
+document.getElementById("changeOrder").addEventListener("click", function(){
+    let coffeeType = document.getElementById("coffeeType");
+    coffeeType.textContent = "Espresso";
+    coffeeType.style.backgroundColor = "red";
+    coffeeType.style.padding = "10px";
+})
