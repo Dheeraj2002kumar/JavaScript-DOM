@@ -20,3 +20,12 @@ document.getElementById("changeOrder").addEventListener("click", function(){
     coffeeType.style.backgroundColor = "red";
     coffeeType.style.padding = "10px";
 })
+
+// Example 4
+
+document.getElementById("addNewItem").addEventListener("click", function(){
+    let newItem = document.createElement("li");
+    newItem.textContent = "Eggs";
+
+    document.getElementById("shoppingList").appendChild(newItem);
+})
